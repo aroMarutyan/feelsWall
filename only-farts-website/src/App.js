@@ -1,9 +1,8 @@
 import "./App.css";
 import db from "./firebase";
-import { onSnapshot, collection, addDoc } from "@firebase/firestore";
-// import { onSnapshot, collection, doc, setDoc } from "@firebase/firestore";
+import { onSnapshot, collection } from "@firebase/firestore";
 
-import { useState, useRef, useEffect } from "react"; //use effect will be used for the display website
+import { useState, useEffect } from "react";
 
 import "./App.css";
 
@@ -15,6 +14,12 @@ const DisplayMessages = ({ message }) => {
     </>
   );
 };
+
+//Add censorship filter
+
+//Add color-coding function
+
+//Add statistics page. Use react router
 
 function App() {
   const [messages, setMessages] = useState([]);
