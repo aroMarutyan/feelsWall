@@ -11,12 +11,24 @@ import {
   angry,
 } from "./dictionary";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const App = () => {
   const [formValue, setFormValue] = useState("");
   const [emotion, setEmotion] = useState("");
+  // const [count, setCount] = useState(0);
   const [emotionStrength, setEmotionStrength] = useState(new Map());
+  // const [emotionStrength, setEmotionStrength] = useState({
+  //   sad: 0,
+  //   happy: 0,
+  //   disgusted: 0,
+  //   love: 0,
+  //   surprised: 0,
+  //   afraid: 0,
+  //   angry: 0,
+  // });
+
+  //if no emotion, use "other"
 
   const emotionDetector = (message) => {
     const lowerCaseMsg = message.toLowerCase();
@@ -24,19 +36,31 @@ const App = () => {
     const messageChecker = (array) => {
       let wordCount = 0;
       const lowerCaseDict = array.join(",").toLowerCase().split(",");
-      lowerCaseDict.map((word) => lowerCaseMsg.includes(word) && wordCount++);
+      const resultArr = lowerCaseDict.map(
+        (word) => lowerCaseMsg.includes(word) && wordCount++
+      );
       setEmotionStrength(emotionStrength.set(array[0], wordCount));
+      return console.log(wordCount, emotionStrength);
+      //  &&
+      // // lowerCaseDict.some((word) => lowerCaseMsg.includes(word) && count++) &&
+      // setEmotion(`${array[0]}`) &&
+      // console.log()
+      // setEmotionStrength((prevState) => ({
+      //   ...prevState,
+      //   sad: (sad.value = count),
+      // }))
     };
-
-    const emotionStrengthEvaluator = (map) => {
-      const filteredEmotionStrength = [...map].filter((arr) => arr[1] > 0);
-      const sortedEmotionStrength = filteredEmotionStrength.sort(
-        (a, b) => b[1] - a[1]
-      );
-      setEmotion(
-        sortedEmotionStrength.length ? sortedEmotionStrength[0][0] : "other"
-      );
-    };
+    // const messageChecker = (array) => {
+    //   const lowerCaseDict = array.join(",").toLowerCase().split(",");
+    //   return (
+    //     lowerCaseDict.some((word) => lowerCaseMsg.includes(word) && count++) &&
+    //     setEmotion(`${array[0]}`)
+    //     // setEmotionStrength((prevState) => ({
+    //     //   ...prevState,
+    //     //   sad: (sad.value = count),
+    //     // }))
+    //   );
+    // };
 
     messageChecker(sad);
     messageChecker(happy);
@@ -45,8 +69,6 @@ const App = () => {
     messageChecker(surprised);
     messageChecker(afraid);
     messageChecker(angry);
-
-    emotionStrengthEvaluator(emotionStrength);
   };
 
   const handleNewMessage = async (e) => {
