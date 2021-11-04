@@ -98,6 +98,7 @@ export const happy = [
   "Bienaventura",
   "Brillante",
   "Brío",
+  "Buen",
   "Calm",
   "Certe",
   "Comod",
