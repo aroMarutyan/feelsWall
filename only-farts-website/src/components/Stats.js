@@ -1,23 +1,6 @@
-// import { useEffect, useState } from "react";
-// import db from "./firebase";
-// import { onSnapshot, collection } from "@firebase/firestore";
-// import App from "./App";
-
 import * as d3 from "d3";
 import { useEffect } from "react";
-import { colorCoding } from "./colorCoding";
-
-// const MessagesStats = () => {
-//   const [messages, setMessages] = useState([]);
-
-//   useEffect(
-//     () =>
-//       onSnapshot(collection(db, "messages"), (snapshot) =>
-//         setMessages(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-//       ),
-//     []
-//   );
-// };
+import { colorCoding } from "../colorCoding";
 
 const Stats = (props) => {
   // set the dimensions and margins of the graph
@@ -43,16 +26,15 @@ const Stats = (props) => {
   }, [data]);
 
   function drawChart() {
-    //useEffect here
-
     //reduce method - more elegant solution. Check if you can implement it without too much headache
-    const filteredMessages = messages
-      .map((entry) => {
-        return entry.emotion;
-      })
-      .reduce((a, c) => a.set(c, (a.get(c) || 0) + 1), new Map());
+    // const filteredMessages = messages
+    //   .map((entry) => {
+    //     return entry.emotion;
+    //   })
+    //   .reduce((a, c) => a.set(c, (a.get(c) || 0) + 1), new Map());
 
-    console.log(filteredMessages);
+    // console.log(filteredMessages.entries());
+    // console.log(filteredMessages);
 
     //set and filter method - second option if can't get the upper one to output arrays
     let arr = messages.map((entry) => {

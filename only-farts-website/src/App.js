@@ -5,8 +5,8 @@ import { onSnapshot, collection } from "@firebase/firestore";
 import { useState, useEffect } from "react";
 import { colorCoding } from "./colorCoding";
 
-import { BrowserRouter, Route } from "react-router-dom";
-import Stats from "./Stats";
+import { Switch, Route } from "react-router-dom";
+import Stats from "./components/Stats";
 
 import "./App.css";
 
