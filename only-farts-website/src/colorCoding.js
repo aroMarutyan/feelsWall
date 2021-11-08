@@ -7,4 +7,5 @@ colorCoding
   .set("love", "pink")
   .set("surprised", "orange")
   .set("afraid", "yellow")
-  .set("angry", "red");
+  .set("angry", "red")
+  .set("other", "gray");

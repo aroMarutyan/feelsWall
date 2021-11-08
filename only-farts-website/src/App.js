@@ -5,13 +5,33 @@ import { onSnapshot, collection } from "@firebase/firestore";
 import { useState, useEffect } from "react";
 import { colorCoding } from "./colorCoding";
 
+import { BrowserRouter, Route } from "react-router-dom";
+import Stats from "./Stats";
+
 import "./App.css";
+
+// const data = {
+//   angry: 2,
+//   disgusted: 1,
+//   happy: 4,
+//   love: 1,
+//   other: 1,
+//   sad: 1,
+//   surprised: 1,
+// };
+// const data = [
+//   ["sad", 30],
+//   ["angry", 5],
+//   ["happy", 8],
+//   ["afraid", 2],
+//   ["surprised", 6],
+// ];
 
 // const msgStyle = () => {};
 
 //Task list
 // Export messages state to Stats page - can potentially move state to another file and export to other pages from there
-// Implement stats page with number of messages and pie chart
+// Implement stats page with number of messages and pie chart. Should look into D3.js for the pie chart
 // Implement text transition
 // Refactor code and get rid of redundancies
 // Move functions to other files, leave only barebones App here
@@ -89,12 +109,14 @@ const DisplayMessages = ({ message }) => {
 //Can use a formula to calculate, or can put the messages in order
 //three components that choose positioning in three distinct parts of the screen. or 4
 
-export function MessagesState(messages) {
-  useEffect(() => {}, [messages]);
-}
+///Useless
+// export function MessagesState(messages) {
+//   useEffect(() => {}, [messages]);
+// }
 
 function App() {
   const [messages, setMessages] = useState([]);
+  console.log(messages);
 
   // const mountUnmountComponent = (counter, delay)=>{
   //   useEffect(() => {
@@ -253,6 +275,7 @@ function App() {
         >
           <h1 style={{ marginTop: "0", marginRight: "1em" }}>OnlyFarts</h1>
           <span style={{ marginTop: "0.5em", marginRight: "1em" }}>
+            {/* You can try passing the message value here directly as a prop, without using context */}
             <a href="/Stats.js">Statistics</a>
           </span>
         </div>
@@ -287,6 +310,14 @@ function App() {
             message={messages[Math.floor(Math.random() * messages.length)]}
           />
         )} */}
+
+        <Stats
+          data={messages}
+          outerRadius="200"
+          innerRadius="100"
+          messages={messages}
+        />
+
         {messages.length && <DisplayAsyncMessage1 delay="3000" />}
         {/* {messages.length && <DisplayAsyncMessage2 delay="4000" />} */}
         {/* {messages.length && <DisplayAsyncMessage3 delay="5000" />} */}
