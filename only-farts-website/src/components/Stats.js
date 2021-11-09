@@ -2,9 +2,9 @@ import * as d3 from "d3";
 import { useEffect } from "react";
 import { colorCoding } from "../colorCoding";
 
-const Stats = (props) => {
+const Stats = ({ data, outerRadius, innerRadius, messages }) => {
   // set the dimensions and margins of the graph
-  const { data, outerRadius, innerRadius, messages } = props;
+  // const { data, outerRadius, innerRadius, messages } = props;
 
   const margin = {
     top: 50,
@@ -102,10 +102,10 @@ const Stats = (props) => {
     // });
   }
   return (
-    <>
+    <div>
       <div id="pie-container" />
-      <h1>{messages.length}</h1>
-    </>
+      <h1>Messages submitted: {messages.length}</h1>
+    </div>
   );
 };
 
