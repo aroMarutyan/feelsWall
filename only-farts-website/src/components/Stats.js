@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { useEffect } from "react";
-import { colorCoding } from "../colorCoding";
+import { colorCoding } from "../core/colorCoding";
 
 const Stats = ({ data, outerRadius, innerRadius, messages }) => {
   // set the dimensions and margins of the graph

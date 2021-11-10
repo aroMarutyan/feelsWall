@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import db from "../firebase";
+import db from "../core/firebase";
 import { onSnapshot, collection } from "@firebase/firestore";
 import AsyncMessageDelivery from "./AsyncMessageDelivery";
 

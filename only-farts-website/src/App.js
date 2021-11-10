@@ -1,25 +1,30 @@
 import "./App.css";
-import db from "./firebase";
+import db from "./core/firebase";
 import { onSnapshot, collection } from "@firebase/firestore";
 
 import { useState, useEffect } from "react";
-import { colorCoding } from "./colorCoding";
 
-import { Switch, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Stats from "./components/Stats";
 
 import MessagesAggregator from "./components/MessagesAggregator";
-import AsyncMessageDelivery from "./components/AsyncMessageDelivery";
+// import AsyncMessageDelivery from "./components/AsyncMessageDelivery";
 
 import "./App.css";
 
 //Task list
-// Export messages state to Stats page - can potentially move state to another file and export to other pages from there
-// Implement stats page with number of messages and pie chart. Should look into D3.js for the pie chart
+// Move datafetching to another component. use Context
+// Figure out method for chaning top, bottom, etc. without creating duplicate components
+// Create * page for nonexistent paths - "This page does not exist. Go back"
+// Implement Stiches and see if it's actually worth it
 // Implement text transition
-// Refactor code and get rid of redundancies
-// Move functions to other files, leave only barebones App here
+// Implement "message being sent" animation for the message page
+// Refactor code, get rid of redundancies, and clean up. Including directories and default React shit
+// Figure out what's the deal with the confusing firebase functions - called but never used
+// Document every function with the cool document function. This is at the very end
+// UNLIKELY - figure out method to prevent components form rerendering every time a message is sent to the database
+// OPTIONAL - make censorship filter. For the kicks
 
 //Add censorship filter - optional
 // const censorFilter = (message) => {

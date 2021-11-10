@@ -1,4 +1,4 @@
-import { colorCoding } from "../colorCoding";
+import { colorCoding } from "../core/colorCoding";
 import { useState } from "react";
 
 const DisplayMessages = ({ message }) => {
