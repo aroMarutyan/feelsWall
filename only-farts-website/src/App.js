@@ -2,9 +2,10 @@ import "./App.css";
 import db from "./core/firebase";
 import { onSnapshot, collection } from "@firebase/firestore";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+// import { DataContext, DataContextProvider } from "./core/databaseSnapshot";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 import Stats from "./components/Stats";
 
@@ -14,11 +15,13 @@ import MessagesAggregator from "./components/MessagesAggregator";
 import "./App.css";
 
 //Task list
-// Move datafetching to another component. use Context
-// Figure out method for chaning top, bottom, etc. without creating duplicate components
+// Move datafetching to another component. use Context - OPTIONAL
+// Figure out method for changing top, bottom, etc. without creating duplicate components
+// Clean up the whole data==messages mess in Stats
 // Create * page for nonexistent paths - "This page does not exist. Go back"
 // Implement Stiches and see if it's actually worth it
 // Implement text transition
+// Add try catch - OPTIONAL
 // Implement "message being sent" animation for the message page
 // Refactor code, get rid of redundancies, and clean up. Including directories and default React shit
 // Figure out what's the deal with the confusing firebase functions - called but never used
@@ -33,6 +36,7 @@ import "./App.css";
 // };
 
 function App() {
+  // const { messages } = useContext(DataContext);
   const [messages, setMessages] = useState([]);
 
   useEffect(
@@ -69,21 +73,29 @@ function App() {
         /> */}
 
         {/* Can just put the styles here */}
-        <Routes>
-          <Route path="/" exact element={<MessagesAggregator />} />
-          <Route
-            path="/stats"
-            exact
-            element={
-              <Stats
-                data={messages}
-                outerRadius="200"
-                innerRadius="100"
-                messages={messages}
-              />
-            }
-          />
-        </Routes>
+        {/* <DataContextProvider value={messages}> */}
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              exact
+              element={<MessagesAggregator messages={messages} />}
+            />
+            <Route
+              path="/stats"
+              exact
+              element={
+                <Stats
+                  // data={messages}
+                  outerRadius="200"
+                  innerRadius="100"
+                  messages={messages}
+                />
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+        {/* </DataContextProvider> */}
       </header>
       {/* <h2>
         {messages.length && (

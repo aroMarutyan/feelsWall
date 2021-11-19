@@ -1,19 +1,19 @@
 import { colorCoding } from "../core/colorCoding";
-import { useState } from "react";
+// import { useState } from "react";
 
-const DisplayMessages = ({ message }) => {
+const DisplayMessages = ({ message, position }) => {
   //potentially put useState here to control displaying of messages
-  const [msgVisibility, setMsgVisibility] = useState("block");
+  // const [msgVisibility, setMsgVisibility] = useState("block");
 
-  const MessageStyles = {
-    // position: "absolute",
-    // top: `${Math.floor(Math.random() * 50)}%`,
-    // left: `${Math.floor(Math.random() * 50)}%`,
-    // transform: "translate(-20%, -20%)",
-    display: msgVisibility,
-    transition: "display 1s ease", //Not doing anything
-    color: colorCoding.get(message.emotion),
-  };
+  // const MessageStyles = {
+  //   // position: "absolute",
+  //   // top: `${Math.floor(Math.random() * 50)}%`,
+  //   // left: `${Math.floor(Math.random() * 50)}%`,
+  //   // transform: "translate(-20%, -20%)",
+  //   // display: msgVisibility,
+  //   transition: "display 1s ease", //Not doing anything
+  //   color: colorCoding.get(message.emotion),
+  // };
 
   // useEffect(() => {
   //   setTimeout(() => {
@@ -45,18 +45,12 @@ const DisplayMessages = ({ message }) => {
   //   setMsgVisibility("none");
   // }, 3000);
 
-  return msgVisibility ? (
+  return (
     <>
-      <h3
-        style={MessageStyles}
-        // style={{ color: colorCoding.get(message.emotion) }}
-      >
+      <h3 style={{ color: colorCoding.get(message.emotion) }}>
         {message.message}
       </h3>
-      {/* <span>{message.emotion}</span> */}
     </>
-  ) : (
-    <></>
   );
 };
 

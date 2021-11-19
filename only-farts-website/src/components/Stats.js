@@ -1,10 +1,12 @@
 import * as d3 from "d3";
 import { useEffect } from "react";
 import { colorCoding } from "../core/colorCoding";
+// import { DataContext } from "../core/databaseSnapshot";
 
-const Stats = ({ data, outerRadius, innerRadius, messages }) => {
+const Stats = ({ outerRadius, innerRadius, messages }) => {
   // set the dimensions and margins of the graph
   // const { data, outerRadius, innerRadius, messages } = props;
+  // const { messages } = useContext(DataContext);
 
   const margin = {
     top: 50,
@@ -23,7 +25,7 @@ const Stats = ({ data, outerRadius, innerRadius, messages }) => {
 
   useEffect(() => {
     drawChart();
-  }, [data]);
+  }, [messages]);
 
   function drawChart() {
     //reduce method - more elegant solution. Check if you can implement it without too much headache

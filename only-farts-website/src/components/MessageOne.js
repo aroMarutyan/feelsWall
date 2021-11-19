@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/messageStyles.css";
 // import { styled, css } from "@stitches/react";
 
-const AsyncMessageDelivery = ({ messages, delay, style }) => {
+const MessageOne = ({ messages, delay, style }) => {
   const [counter1, setCounter1] = useState(1);
   //Need to figure out way to make top bottom right left props
   const AsyncMessageStyles = {
@@ -26,8 +26,8 @@ const AsyncMessageDelivery = ({ messages, delay, style }) => {
   return counter1 > 0 ? (
     <div
       // className="bottom-right"
-      // style={AsyncMessageStyles}
-      style={style}
+      style={AsyncMessageStyles}
+      //   style={style}
     >
       <DisplayMessages
         // style={AsyncMessageStyles}
@@ -41,4 +41,4 @@ const AsyncMessageDelivery = ({ messages, delay, style }) => {
   );
 };
 
-export default AsyncMessageDelivery;
+export default MessageOne;

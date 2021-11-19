@@ -1,0 +1,24 @@
+.bottom-right {
+  position: absolute;
+  bottom: 30%;
+  right: 30%;
+  /* display: none; */
+}
+.bottom-left {
+  position: absolute;
+
+  bottom: 30%;
+  left: 30%;
+}
+.top-right {
+  position: absolute;
+
+  top: 30%;
+  right: 30%;
+}
+.top-left {
+  position: absolute;
+
+  top: 30%;
+  left: 30%;
+}

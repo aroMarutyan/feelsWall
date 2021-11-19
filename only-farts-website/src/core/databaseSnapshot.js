@@ -2,14 +2,21 @@ import db from "./firebase";
 import { onSnapshot, collection } from "@firebase/firestore";
 import { createContext, useState, useEffect } from "react";
 
-const Context = createContext("Default Value");
+export const DataContext = createContext([]);
 
-const [messages, setMessages] = useState([]);
+export const DataContextProvider = ({ children }) => {
+  const [messages, setMessages] = useState([]);
+  useEffect(
+    () =>
+      onSnapshot(collection(db, "messages"), (snapshot) =>
+        setMessages(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+      ),
+    []
+  );
+  // const dataContext = messages;
 
-useEffect(
-  () =>
-    onSnapshot(collection(db, "messages"), (snapshot) =>
-      setMessages(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-    ),
-  []
-);
+  return (
+    <DataContext.Provider value={messages}>{children}</DataContext.Provider>
+  );
+};
+// export const { Consumer } = Context;
