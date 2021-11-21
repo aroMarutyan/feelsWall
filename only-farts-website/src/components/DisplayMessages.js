@@ -1,7 +1,7 @@
 import { colorCoding } from "../core/colorCoding";
 // import { useState } from "react";
 
-const DisplayMessages = ({ message, position }) => {
+const DisplayMessages = ({ message }) => {
   //potentially put useState here to control displaying of messages
   // const [msgVisibility, setMsgVisibility] = useState("block");
 
