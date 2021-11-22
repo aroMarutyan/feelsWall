@@ -49,7 +49,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <nav>
         <div
           style={{
             display: "flex",
@@ -65,6 +65,8 @@ function App() {
             <a href="/stats">Statistics</a>
           </span>
         </div>
+      </nav>
+      <header className="App-header">
         {/* <Stats
           data={messages}
           outerRadius="200"

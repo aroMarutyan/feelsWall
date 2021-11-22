@@ -47,7 +47,12 @@ const DisplayMessages = ({ message }) => {
 
   return (
     <>
-      <h3 style={{ color: colorCoding.get(message.emotion) }}>
+      <h3
+        style={{
+          color: colorCoding.get(message.emotion),
+          width: "75%",
+        }}
+      >
         {message.message}
       </h3>
     </>

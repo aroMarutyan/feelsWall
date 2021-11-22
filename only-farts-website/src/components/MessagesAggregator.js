@@ -30,7 +30,6 @@ import { useTransition, animated } from "@react-spring/web";
 // });
 
 const MessagesAggregator = ({ messages }) => {
-  // const transition = useTransition();
   return (
     <>
       {/* {messages.length && (
@@ -39,23 +38,47 @@ const MessagesAggregator = ({ messages }) => {
         </Box>
       )} */}
 
-      {/* {messages.length && (
-        <AsyncMessageDelivery
+      {messages.length && (
+        <MessageOne
           messages={messages}
-          delay="4000"
-          style={{
-            position: "absolute",
-
-            bottom: `${Math.floor(Math.random() * 30)}%`,
-            right: `${Math.floor(Math.random() * 30)}%`,
-          }}
+          delay="500"
+          xCorrectionValue={0}
+          yCorrectionValue={0}
+          xMathSign={"-"}
+          yMathSign={"-"}
         />
-      )} */}
+      )}
+      {messages.length && (
+        <MessageOne
+          messages={messages}
+          delay="750"
+          xCorrectionValue={0}
+          yCorrectionValue={0}
+          xMathSign={""}
+          yMathSign={"-"}
+        />
+      )}
+      {messages.length && (
+        <MessageOne
+          messages={messages}
+          delay="1000"
+          xCorrectionValue={0}
+          yCorrectionValue={0}
+          xMathSign={"-"}
+          yMathSign={""}
+        />
+      )}
+      {messages.length && (
+        <MessageOne
+          messages={messages}
+          delay="1250"
+          xCorrectionValue={0}
+          yCorrectionValue={0}
+          xMathSign={""}
+          yMathSign={""}
+        />
+      )}
 
-      {messages.length && <MessageOne messages={messages} delay="3000" />}
-      {/* {messages.length && <MessageTwo messages={messages} delay="3000" />}
-      {messages.length && <MessageThree messages={messages} delay="4000" />}
-      {messages.length && <MessageFour messages={messages} delay="5000" />} */}
       {/* {messages.length && (
         <AsyncMessageDelivery messages={messages} delay="6000" />
       )} */}
