@@ -12,6 +12,7 @@ import {
 } from "./dictionary";
 
 import { useState } from "react";
+import { useSpring, animated } from "@react-spring/web";
 
 const App = () => {
   const [formValue, setFormValue] = useState("");
@@ -52,8 +53,12 @@ const App = () => {
   const handleNewMessage = async (e) => {
     e.preventDefault();
     const collectionRef = collection(db, "messages");
+    let finalMsg = formValue.charAt(0).toUpperCase() + formValue.slice(1);
 
-    const payload = { message: formValue, emotion: emotion };
+    const payload = {
+      message: finalMsg,
+      emotion: emotion,
+    };
     const docRef = await addDoc(collectionRef, payload);
 
     setFormValue("");
@@ -81,8 +86,11 @@ const App = () => {
             🕊️
           </button>
         </form>
-
-        <h2>{formValue}</h2>
+        <animated.div>
+          <div style={{ position: "absolute" }}>
+            <h2>{formValue}</h2>
+          </div>
+        </animated.div>
       </header>
     </div>
   );

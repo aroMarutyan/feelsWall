@@ -1,11 +1,9 @@
 // import AsyncMessageDelivery from "./AsyncMessageDelivery";
-import MessageOne from "./MessageOne";
-import MessageTwo from "./MessageTwo";
-import MessageThree from "./MessageThree";
-import MessageFour from "./MessageFour";
+import AsyncAnimMsg from "./AsyncAnimMsg";
+
 // import { styled } from "@stitches/react";
 import "../styles/messageStyles.css";
-import { useTransition, animated } from "@react-spring/web";
+// import { useTransition, animated } from "@react-spring/web";
 
 ///Figure out what to do with stitches
 // const Box = styled("div", {
@@ -39,19 +37,19 @@ const MessagesAggregator = ({ messages }) => {
       )} */}
 
       {messages.length && (
-        <MessageOne
+        <AsyncAnimMsg
           messages={messages}
-          delay="500"
+          tension="140"
           xCorrectionValue={0}
           yCorrectionValue={0}
           xMathSign={"-"}
           yMathSign={"-"}
         />
       )}
-      {messages.length && (
-        <MessageOne
+      {/* {messages.length && (
+        <AsyncAnimMsg
           messages={messages}
-          delay="750"
+          tension="160"
           xCorrectionValue={0}
           yCorrectionValue={0}
           xMathSign={""}
@@ -59,9 +57,9 @@ const MessagesAggregator = ({ messages }) => {
         />
       )}
       {messages.length && (
-        <MessageOne
+        <AsyncAnimMsg
           messages={messages}
-          delay="1000"
+          tension="180"
           xCorrectionValue={0}
           yCorrectionValue={0}
           xMathSign={"-"}
@@ -69,15 +67,15 @@ const MessagesAggregator = ({ messages }) => {
         />
       )}
       {messages.length && (
-        <MessageOne
+        <AsyncAnimMsg
           messages={messages}
-          delay="1250"
+          tension="200"
           xCorrectionValue={0}
           yCorrectionValue={0}
           xMathSign={""}
           yMathSign={""}
         />
-      )}
+      )} */}
 
       {/* {messages.length && (
         <AsyncMessageDelivery messages={messages} delay="6000" />

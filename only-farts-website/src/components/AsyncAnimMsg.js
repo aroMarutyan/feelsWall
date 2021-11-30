@@ -2,31 +2,39 @@ import DisplayMessages from "./DisplayMessages";
 import React, { useState, useEffect } from "react";
 import "../styles/messageStyles.css";
 // import { styled, css } from "@stitches/react";
-import { useTransition, animated, config, useSpring } from "@react-spring/web";
+import { useTransition, animated } from "@react-spring/web";
 
-//VITAL - need to figure out how to compute with percentages - DONE
 //VITAL - figure out how to keep the messages within bounds. Guess will have something to do with absolute/relative positions, the message aggregator component, and the App-header div. App-header div takes up the whole screen regardless what's there
 //VITAL - figure out a way to make them appear async. Delay within the transition animation creates issues. Might need to figure out another way
+//Try to play around with the config settings. Maybe can get delay there
 //Adjust DisplayMessages width so that the next comes out compact and on several lines - DONE, but needs fine tuning
 //Need to figure out the correctionValue. Right now cannot have both "-" and additional value, as type coercion is a bitch. Have to choose an implementation. If I put -200 it makes the math and subtracts the result - DONE
 //Styles solved!!!
-///PUT THE MESSAGES IN A STATE. UPDATE THE STATE WHEN THE ANIMATION ENDS! BETTER WITH STATE ANYWAYS
-//It resets anymations onRest, rerendering the component. that's why it moves, changes text and then fades away. We need to figure out a method to have the whole animation cycle without rerendering
-//Try with useEffect again. Maybe combine it with one of the animation properties (onRest,etc) to trigger the rerender when the whole animation ends
 
-const MessageOne = ({
+// Tasks left to do:
+// 1. Solve async displaying of the messages - try playing around with the config value - DONE
+// 2. Create a bounding box so the messages do not go out of bounds
+// 2.1. Position the elements in the different parts of the screen
+// 3. Add frosted glass loading to messages website
+// 4. Animate sending message
+// 5. Style everything
+// 6. Clean up code
+// 7. Secure firebase and add rules
+// 8. Figure out deployment
+
+const AsyncAnimMsg = ({
   messages,
   xCorrectionValue,
   yCorrectionValue,
   xMathSign,
   yMathSign,
-  delay,
+  tension,
 }) => {
   // const [counter1, setCounter1] = useState(1);
   const [isVisible, setIsVisible] = useState(true);
   const [message, setMessage] = useState("");
   const [positionValue, setPositionValue] = useState(
-    `${Math.floor(Math.random() * 100)}%`
+    `${Math.floor(Math.random() * 300)}%`
   );
   // const { opacity } = useSpring({ opacity: isVisible ? 1 : 0 });
   const transition = useTransition(isVisible, {
@@ -53,20 +61,24 @@ const MessageOne = ({
     // },
     // leave: { opacity: 0 },
 
-    // config: { tension: 220, friction: 120 },
-
-    config: config.molasses,
+    config: { mass: 1, tension: tension, friction: 30 },
+    // config: { mass: 1, tension: tension, friction: 120 },
     onRest: () => setIsVisible(!isVisible),
   });
 
   function positionCalculator(sign, positionValue, correctionValue) {
     return Number(sign + (correctionValue + positionValue));
   }
+  //This is a good start. Best option is to find a way to bind it within borders, but if not, adjust values so that it stays within borders. More research
+  function getRandomPosition(min, max) {
+    return `${(Math.random() * (max - min) + min) * 10}%`;
+  }
 
   useEffect(() => {
     if (isVisible) {
       setMessage(messages[Math.floor(Math.random() * messages.length)]);
-      setPositionValue(`${Math.floor(Math.random() * 100)}%`);
+      setPositionValue(getRandomPosition(3, 15));
+      // setPositionValue(`${Math.floor(Math.random() * 100)}%`);
     }
   }, [isVisible]);
 
@@ -88,7 +100,7 @@ const MessageOne = ({
   return (
     // <div className="Testing div">
     <div
-      className="container"
+      className="containerr"
       // style={{ position: "absolute" }}
     >
       {transition((style, item) =>
@@ -120,7 +132,7 @@ const MessageOne = ({
   );
 };
 
-export default MessageOne;
+export default AsyncAnimMsg;
 
 // return (
 //   isVisible && (

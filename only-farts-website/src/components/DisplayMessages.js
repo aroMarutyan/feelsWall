@@ -51,6 +51,7 @@ const DisplayMessages = ({ message }) => {
         style={{
           color: colorCoding.get(message.emotion),
           width: "75%",
+          // position: "absolute",
         }}
       >
         {message.message}
