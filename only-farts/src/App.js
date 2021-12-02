@@ -11,15 +11,43 @@ import {
   angry,
 } from "./dictionary";
 
-import { useState } from "react";
-import { useSpring, animated } from "@react-spring/web";
+import { useState, useEffect } from "react";
+import { useSpring, animated, config } from "@react-spring/web";
 
 const App = () => {
   const [formValue, setFormValue] = useState("");
   const [emotion, setEmotion] = useState("");
   const [emotionStrength, setEmotionStrength] = useState(new Map());
+  const [animate, setAnimate] = useState(false);
 
-  const emotionDetector = (message) => {
+  const [styles, api] = useSpring(() => ({
+    // to: [
+    //   { x: 0, y: -100 },
+    //   { x: 0, y: -600 },
+    //   { x: 0, y: -200 },
+    // ],
+    from: { x: 0, y: -200 },
+    // to: async (next, cancel) => {
+    //   await next({ x: 0, y: -100 });
+    //   await next({ x: 0, y: -600 });
+    //   await next({ x: 0, y: -200 });
+    // },
+    // from: { x: 0, y: -200 },
+    // config: config.molasses,
+    // onRest: () => setAnimate((v) => !v),
+  }));
+  useEffect(() => {
+    api.start({
+      // from: { x: 0, y: -200 },
+      to: [
+        { x: 0, y: -100 },
+        { x: 0, y: -600 },
+        { x: 0, y: -200 },
+      ],
+    });
+  }, [animate]);
+
+  function emotionDetector(message) {
     const lowerCaseMsg = message.toLowerCase();
 
     const messageChecker = (array) => {
@@ -48,7 +76,7 @@ const App = () => {
     messageChecker(angry);
 
     emotionStrengthEvaluator(emotionStrength);
-  };
+  }
 
   const handleNewMessage = async (e) => {
     e.preventDefault();
@@ -61,16 +89,36 @@ const App = () => {
     };
     const docRef = await addDoc(collectionRef, payload);
 
-    setFormValue("");
-    console.log(`The emotion is ${emotion}`);
-    setEmotion("");
-    console.log(`The ID of this message is ${docRef.id}`);
+    setTimeout(() => {
+      setFormValue("");
+      setEmotion("");
+    }, 1000);
+
+    // console.log(`The emotion is ${emotion}`);
+
+    // console.log(`The ID of this message is ${docRef.id}`);
+  };
+
+  const submitBtn = () => {
+    emotionDetector(formValue);
+    setAnimate((v) => !v);
+    // setTimeout(() => {
+    //   setAnimate((v) => !v);
+    // }, 1000);
   };
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>OnlyFarts</h1>
+      <main
+        className="App-header"
+        style={{ display: "flex", justifyContent: "space-evenly" }}
+      >
+        <animated.div style={styles}>
+          <div className="msg-bubble">
+            <h2>{formValue}</h2>
+          </div>
+        </animated.div>
+
         <form onSubmit={handleNewMessage}>
           <input
             value={formValue}
@@ -80,18 +128,13 @@ const App = () => {
 
           <button
             type="submit"
-            onClick={() => emotionDetector(formValue)}
+            onClick={() => submitBtn()}
             disabled={!formValue}
           >
             🕊️
           </button>
         </form>
-        <animated.div>
-          <div style={{ position: "absolute" }}>
-            <h2>{formValue}</h2>
-          </div>
-        </animated.div>
-      </header>
+      </main>
     </div>
   );
 };

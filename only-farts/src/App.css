@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.msg-bubble {
+  height: 20vh;
+  width: 30vw;
+  border-radius: 15px;
+  background-color: white;
+  color: black;
+  flex: 1;
+}
