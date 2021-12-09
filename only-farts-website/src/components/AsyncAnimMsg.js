@@ -1,5 +1,5 @@
 import DisplayMessages from "./DisplayMessages";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/messageStyles.css";
 // import { styled, css } from "@stitches/react";
 import { useTransition, animated } from "@react-spring/web";
@@ -14,14 +14,21 @@ import { useTransition, animated } from "@react-spring/web";
 // Tasks left to do:
 // 1. Solve async displaying of the messages - try playing around with the config value - DONE
 // 2. Create a bounding box so the messages do not go out of bounds
-// 2.1. Position the elements in the different parts of the screen
+// 2.1. Position the elements in the different parts of the screen - DONE
 // 3. Add frosted glass loading to messages website
-// 4. Animate sending message
+// 4. Animate sending message - DONE
+// 4.1 OPTIONAL Add stars
+// Optimize for different screens and mobile devices
 // 5. Style everything
 // 6. Clean up code
 // 7. Secure firebase and add rules
 // 8. Figure out deployment
 
+// Need to figure out formula for the positioning - all the variables and numbers must be derived from the window dimensions.
+// The dimension values are in an array now so that they can be sorted and used as min and max. Not sure how useful that is
+// You really need to play around with the numbers. Take into account both computer and phone screens - vertical vs horizontal
+
+// The displacement/jitter that sometimes occurs has to do with the div.containerr sizes. Maybe because of display:flex stuff. Need to figure out
 const AsyncAnimMsg = ({
   messages,
   xCorrectionValue,
@@ -34,21 +41,35 @@ const AsyncAnimMsg = ({
   const [isVisible, setIsVisible] = useState(true);
   const [message, setMessage] = useState("");
   const [positionValue, setPositionValue] = useState(
-    `${Math.floor(Math.random() * 300)}%`
+    Math.floor(Math.random() * 100)
   );
+  const wHeight = window.innerHeight / 10;
+  const wWidth = window.innerWidth / 4;
+  let dimArr = [wHeight, wWidth];
   // const { opacity } = useSpring({ opacity: isVisible ? 1 : 0 });
   const transition = useTransition(isVisible, {
     from: {
-      x: positionValue,
-      y: positionValue,
+      x: "-50%",
+      y: "-50%",
       opacity: 0,
     },
     enter: {
-      x: positionValue,
-      y: positionValue,
+      x: "50%",
+      y: "50%",
       opacity: 1,
     },
     leave: { opacity: 0 },
+    // from: {
+    //   x: Number(xMathSign + (wWidth - positionValue)),
+    //   y: Number(yMathSign + (wHeight - positionValue)),
+    //   opacity: 0,
+    // },
+    // enter: {
+    //   x: Number(xMathSign + (wWidth - positionValue)),
+    //   y: Number(yMathSign + (wHeight - positionValue)),
+    //   opacity: 1,
+    // },
+    // leave: { opacity: 0 },
     // from: {
     //   x: positionCalculator(xMathSign, xCorrectionValue, positionValue),
     //   y: positionCalculator(yMathSign, yCorrectionValue, positionValue),
@@ -66,19 +87,35 @@ const AsyncAnimMsg = ({
     onRest: () => setIsVisible(!isVisible),
   });
 
-  function positionCalculator(sign, positionValue, correctionValue) {
-    return Number(sign + (correctionValue + positionValue));
+  function positionCalculator(sign, positionValue) {
+    // return Number(sign + (correctionValue + positionValue));
+    let res =
+      Number(sign + positionValue) +
+      Number(sign + Math.floor(Math.random() * 200));
+
+    if (Math.abs(res) >= 180) {
+      res = 180;
+      res = Number(sign + res);
+    }
+    // console.log(sign + res);
+    console.log(res);
+    return res;
   }
+
   //This is a good start. Best option is to find a way to bind it within borders, but if not, adjust values so that it stays within borders. More research
   function getRandomPosition(min, max) {
-    return `${(Math.random() * (max - min) + min) * 10}%`;
+    return Math.random() * (max - min) + min;
   }
+  // function getRandomPosition(...arr) {
+  //   return `${(Math.random() * (arr[0] - arr[1]) + arr[1]) * 30}`;
+  // }
 
   useEffect(() => {
     if (isVisible) {
       setMessage(messages[Math.floor(Math.random() * messages.length)]);
-      setPositionValue(getRandomPosition(3, 15));
-      // setPositionValue(`${Math.floor(Math.random() * 100)}%`);
+      // setPositionValue(getRandomPosition(dimArr.sort()));
+      // console.log(positionValue);
+      setPositionValue(getRandomPosition(1, 10) * 30);
     }
   }, [isVisible]);
 

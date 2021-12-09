@@ -1,7 +1,14 @@
 import { colorCoding } from "../core/colorCoding";
 // import { useState } from "react";
+import { styled, css } from "@stitches/react";
 
 const DisplayMessages = ({ message }) => {
+  const messages = css({
+    color: colorCoding.get(message.emotion),
+    width: "75%",
+    fontSize: "50%",
+    // position: "absolute",
+  });
   //potentially put useState here to control displaying of messages
   // const [msgVisibility, setMsgVisibility] = useState("block");
 
@@ -47,15 +54,7 @@ const DisplayMessages = ({ message }) => {
 
   return (
     <>
-      <h3
-        style={{
-          color: colorCoding.get(message.emotion),
-          width: "75%",
-          // position: "absolute",
-        }}
-      >
-        {message.message}
-      </h3>
+      <h3 className={messages()}>{message.message}</h3>
     </>
   );
 };

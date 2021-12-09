@@ -28,6 +28,9 @@ import "../styles/messageStyles.css";
 // });
 
 const MessagesAggregator = ({ messages }) => {
+  //Figure out this thing!
+  const mobileTest = () =>
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
   return (
     <>
       {/* {messages.length && (
@@ -39,17 +42,17 @@ const MessagesAggregator = ({ messages }) => {
       {messages.length && (
         <AsyncAnimMsg
           messages={messages}
-          tension="140"
+          tension="40"
           xCorrectionValue={0}
           yCorrectionValue={0}
           xMathSign={"-"}
           yMathSign={"-"}
         />
       )}
-      {/* {messages.length && (
+      {messages.length && (
         <AsyncAnimMsg
           messages={messages}
-          tension="160"
+          tension="50"
           xCorrectionValue={0}
           yCorrectionValue={0}
           xMathSign={""}
@@ -59,7 +62,7 @@ const MessagesAggregator = ({ messages }) => {
       {messages.length && (
         <AsyncAnimMsg
           messages={messages}
-          tension="180"
+          tension="60"
           xCorrectionValue={0}
           yCorrectionValue={0}
           xMathSign={"-"}
@@ -69,13 +72,13 @@ const MessagesAggregator = ({ messages }) => {
       {messages.length && (
         <AsyncAnimMsg
           messages={messages}
-          tension="200"
+          tension="70"
           xCorrectionValue={0}
           yCorrectionValue={0}
           xMathSign={""}
           yMathSign={""}
         />
-      )} */}
+      )}
 
       {/* {messages.length && (
         <AsyncMessageDelivery messages={messages} delay="6000" />
