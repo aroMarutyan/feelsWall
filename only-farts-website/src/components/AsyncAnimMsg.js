@@ -48,6 +48,7 @@ const AsyncAnimMsg = ({
   let dimArr = [wHeight, wWidth];
   // const { opacity } = useSpring({ opacity: isVisible ? 1 : 0 });
   const transition = useTransition(isVisible, {
+    //Try to adapt the font formula here
     from: {
       x: "-50%",
       y: "-50%",

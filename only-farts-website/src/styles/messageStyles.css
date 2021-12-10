@@ -1,4 +1,4 @@
-.bottom-right {
+/* .bottom-right {
   position: absolute;
   bottom: 30%;
   right: 30%;
@@ -22,9 +22,9 @@
   top: 30%;
   left: 30%;
 }
-*/
 
-/* CSS is fucked */
+
+
 .containerr {
   display: flex;
   flex-direction: column;
@@ -33,4 +33,4 @@
   width: 80%;
   height: 100%;
   font-size: 1px;
-}
+} */

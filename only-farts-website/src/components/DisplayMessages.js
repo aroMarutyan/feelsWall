@@ -1,56 +1,23 @@
 import { colorCoding } from "../core/colorCoding";
-// import { useState } from "react";
-import { styled, css } from "@stitches/react";
+
+import {
+  css,
+  slope,
+  yAxisIntersection,
+  minFontSize,
+  maxFontSize,
+} from "../styles/mediaStyles";
 
 const DisplayMessages = ({ message }) => {
   const messages = css({
     color: colorCoding.get(message.emotion),
     width: "75%",
-    fontSize: "50%",
+    // fontSize: "clamp(1rem, 50%, 5rem)",
+    fontSize: `clamp(${minFontSize}rem, ${yAxisIntersection}rem + ${
+      slope * 100
+    }vw, ${maxFontSize}rem)`,
     // position: "absolute",
   });
-  //potentially put useState here to control displaying of messages
-  // const [msgVisibility, setMsgVisibility] = useState("block");
-
-  // const MessageStyles = {
-  //   // position: "absolute",
-  //   // top: `${Math.floor(Math.random() * 50)}%`,
-  //   // left: `${Math.floor(Math.random() * 50)}%`,
-  //   // transform: "translate(-20%, -20%)",
-  //   // display: msgVisibility,
-  //   transition: "display 1s ease", //Not doing anything
-  //   color: colorCoding.get(message.emotion),
-  // };
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setMsgVisibility("none");
-  //   }, delay);
-  // }, [delay]);
-
-  // setTimeout(() => {
-  //   setMsgVisibility("none");
-  // }, 3000);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setMsgVisibility(true);
-  //   }, delay);
-  // }, [delay]);
-
-  // return visible ? <div>{props.children}</div> : <div />;
-
-  // const msgVisibilityTimeout = () => {
-  //   setTimeout(() => {
-  //     setMsgVisibility("none");
-  //   }, 1000);
-  // };
-  // msgVisibilityTimeout();
-  // return (
-  // setMsgVisibility("none");
-  // const timer = setTimeout(() => {
-  //   setMsgVisibility("none");
-  // }, 3000);
 
   return (
     <>

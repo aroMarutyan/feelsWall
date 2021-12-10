@@ -28,9 +28,12 @@ import "../styles/messageStyles.css";
 // });
 
 const MessagesAggregator = ({ messages }) => {
-  //Figure out this thing!
-  const mobileTest = () =>
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+  const mobileTest = window.innerWidth > 768;
+
+  // const mobileTest = !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(
+  //   navigator.userAgent
+  // );
+
   return (
     <>
       {/* {messages.length && (
@@ -39,7 +42,7 @@ const MessagesAggregator = ({ messages }) => {
         </Box>
       )} */}
 
-      {messages.length && (
+      {messages.length && mobileTest && (
         <AsyncAnimMsg
           messages={messages}
           tension="40"
