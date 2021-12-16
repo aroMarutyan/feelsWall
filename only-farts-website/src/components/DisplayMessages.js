@@ -11,6 +11,7 @@ import {
 const DisplayMessages = ({ message }) => {
   const messages = css({
     color: colorCoding.get(message.emotion),
+    //add formula to calculate the width - optional
     width: "75%",
     // fontSize: "clamp(1rem, 50%, 5rem)",
     fontSize: `clamp(${minFontSize}rem, ${yAxisIntersection}rem + ${

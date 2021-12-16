@@ -4,13 +4,6 @@ import "../styles/messageStyles.css";
 // import { styled, css } from "@stitches/react";
 import { useTransition, animated } from "@react-spring/web";
 
-//VITAL - figure out how to keep the messages within bounds. Guess will have something to do with absolute/relative positions, the message aggregator component, and the App-header div. App-header div takes up the whole screen regardless what's there
-//VITAL - figure out a way to make them appear async. Delay within the transition animation creates issues. Might need to figure out another way
-//Try to play around with the config settings. Maybe can get delay there
-//Adjust DisplayMessages width so that the next comes out compact and on several lines - DONE, but needs fine tuning
-//Need to figure out the correctionValue. Right now cannot have both "-" and additional value, as type coercion is a bitch. Have to choose an implementation. If I put -200 it makes the math and subtracts the result - DONE
-//Styles solved!!!
-
 // Tasks left to do:
 // 1. Solve async displaying of the messages - try playing around with the config value - DONE
 // 2. Create a bounding box so the messages do not go out of bounds
@@ -43,20 +36,20 @@ const AsyncAnimMsg = ({
   const [positionValue, setPositionValue] = useState(
     Math.floor(Math.random() * 100)
   );
-  const wHeight = window.innerHeight / 10;
-  const wWidth = window.innerWidth / 4;
+  const wHeight = window.innerHeight;
+  const wWidth = window.innerWidth;
   let dimArr = [wHeight, wWidth];
   // const { opacity } = useSpring({ opacity: isVisible ? 1 : 0 });
   const transition = useTransition(isVisible, {
     //Try to adapt the font formula here
     from: {
-      x: "-50%",
-      y: "-50%",
+      x: "0px",
+      y: "45%",
       opacity: 0,
     },
     enter: {
-      x: "50%",
-      y: "50%",
+      x: "0px",
+      y: "45%",
       opacity: 1,
     },
     leave: { opacity: 0 },
@@ -89,19 +82,23 @@ const AsyncAnimMsg = ({
   });
 
   function positionCalculator(sign, positionValue) {
-    // return Number(sign + (correctionValue + positionValue));
-    let res =
-      Number(sign + positionValue) +
-      Number(sign + Math.floor(Math.random() * 200));
-
-    if (Math.abs(res) >= 180) {
-      res = 180;
-      res = Number(sign + res);
-    }
-    // console.log(sign + res);
-    console.log(res);
-    return res;
+    if (wWidth < 640) return 0;
+    if (wWidth > 1440) return 50;
   }
+  // function positionCalculator(sign, positionValue) {
+  //   // return Number(sign + (correctionValue + positionValue));
+  //   let res =
+  //     Number(sign + positionValue) +
+  //     Number(sign + Math.floor(Math.random() * 200));
+
+  //   if (Math.abs(res) >= 180) {
+  //     res = 180;
+  //     res = Number(sign + res);
+  //   }
+  //   // console.log(sign + res);
+  //   console.log(res);
+  //   return res;
+  // }
 
   //This is a good start. Best option is to find a way to bind it within borders, but if not, adjust values so that it stays within borders. More research
   function getRandomPosition(min, max) {
@@ -119,21 +116,6 @@ const AsyncAnimMsg = ({
       setPositionValue(getRandomPosition(1, 10) * 30);
     }
   }, [isVisible]);
-
-  // useEffect(() => {
-  //   if (!isVisible) {
-  //     setTimeout(() => {
-  //       setIsVisible(true);
-  //     }, 2000);
-  //   }
-  // }, [isVisible]);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setCounter1(counter1 + 1);
-  //     // console.log(Math.floor(Math.random() * 50));
-  //   }, delay);
-  // }, [counter1, delay]);
 
   return (
     // <div className="Testing div">

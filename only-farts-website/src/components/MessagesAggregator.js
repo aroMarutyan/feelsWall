@@ -46,8 +46,8 @@ const MessagesAggregator = ({ messages }) => {
         <AsyncAnimMsg
           messages={messages}
           tension="40"
-          xCorrectionValue={0}
-          yCorrectionValue={0}
+          xCorrectionValue={"50%"}
+          yCorrectionValue={"-50%"}
           xMathSign={"-"}
           yMathSign={"-"}
         />
@@ -56,7 +56,7 @@ const MessagesAggregator = ({ messages }) => {
         <AsyncAnimMsg
           messages={messages}
           tension="50"
-          xCorrectionValue={0}
+          xCorrectionValue={"-50%"}
           yCorrectionValue={0}
           xMathSign={""}
           yMathSign={"-"}
@@ -66,8 +66,8 @@ const MessagesAggregator = ({ messages }) => {
         <AsyncAnimMsg
           messages={messages}
           tension="60"
-          xCorrectionValue={0}
-          yCorrectionValue={0}
+          xCorrectionValue={"50%"}
+          yCorrectionValue={"-50%"}
           xMathSign={"-"}
           yMathSign={""}
         />
@@ -76,8 +76,8 @@ const MessagesAggregator = ({ messages }) => {
         <AsyncAnimMsg
           messages={messages}
           tension="70"
-          xCorrectionValue={0}
-          yCorrectionValue={0}
+          xCorrectionValue={"-50%"}
+          yCorrectionValue={"-50%"}
           xMathSign={""}
           yMathSign={""}
         />
