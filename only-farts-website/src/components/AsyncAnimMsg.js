@@ -34,7 +34,7 @@ const AsyncAnimMsg = ({
   const [isVisible, setIsVisible] = useState(true);
   const [message, setMessage] = useState("");
   const [positionValue, setPositionValue] = useState(
-    Math.floor(Math.random() * 100)
+    45 + Math.floor(Math.random() * 10) + "%"
   );
   const wHeight = window.innerHeight;
   const wWidth = window.innerWidth;
@@ -43,12 +43,12 @@ const AsyncAnimMsg = ({
   const transition = useTransition(isVisible, {
     //Try to adapt the font formula here
     from: {
-      x: "0px",
+      x: "20%",
       y: "45%",
       opacity: 0,
     },
     enter: {
-      x: "0px",
+      x: "20%",
       y: "45%",
       opacity: 1,
     },
@@ -113,7 +113,7 @@ const AsyncAnimMsg = ({
       setMessage(messages[Math.floor(Math.random() * messages.length)]);
       // setPositionValue(getRandomPosition(dimArr.sort()));
       // console.log(positionValue);
-      setPositionValue(getRandomPosition(1, 10) * 30);
+      setPositionValue(45 + Math.floor(Math.random() * 10) + "%");
     }
   }, [isVisible]);
 
@@ -139,7 +139,7 @@ const AsyncAnimMsg = ({
               message={message}
               // message={messages[Math.floor(Math.random() * messages.length)]}
             />
-            {console.log()}
+            {console.log(positionValue)}
           </animated.div>
         ) : (
           ""

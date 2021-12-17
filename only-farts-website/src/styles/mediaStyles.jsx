@@ -3,12 +3,14 @@ import { createStitches } from "@stitches/react";
 export const maxFontSize = 1.9;
 export const minFontSize = 1;
 
+const bp0 = 320;
 const bp1 = 640;
 const bp2 = 768;
 const bp3 = 1440;
 
 export const { styled, css } = createStitches({
   media: {
+    bp0: `(min-width: ${bp0}px)`,
     bp1: `(min-width: ${bp1}px)`,
     bp2: `(min-width: ${bp2}px)`,
     bp3: `(min-width: ${bp3}px)`,
@@ -17,3 +19,5 @@ export const { styled, css } = createStitches({
 
 export const slope = (maxFontSize - minFontSize) / (bp3 / 16 - bp1 / 16);
 export const yAxisIntersection = (-bp1 / 16) * slope + minFontSize;
+
+//Insert math forumula here - it's solved!!!
