@@ -17,7 +17,26 @@ export const { styled, css } = createStitches({
   },
 });
 
+//Dynamic font formula
 export const slope = (maxFontSize - minFontSize) / (bp3 / 16 - bp1 / 16);
 export const yAxisIntersection = (-bp1 / 16) * slope + minFontSize;
 
-//Insert math forumula here - it's solved!!!
+//Dynamic animation positioning. Takes into account screen size and distributes the messages using a nonlinear regression
+const initScrVal = (window.innerWidth - 320) / 1120;
+const zeroVal = 0; //x
+const medVal = 15; //y
+const fullVal = 45; //z
+
+const nlRegA =
+  (zeroVal * fullVal - Math.pow(medVal, 2)) / (zeroVal - 2 * medVal + fullVal);
+const nlRegB = Math.pow(medVal - zeroVal, 2) / (zeroVal - 2 * medVal + fullVal);
+const nlRegC = 2 * Math.log((fullVal - medVal) / (medVal - zeroVal));
+
+//Final value for the nl regression. To be used in percentages
+export const nlResVal = nlRegA + nlRegB * Math.exp(nlRegC * initScrVal);
+
+console.log(initScrVal);
+console.log(nlRegA);
+console.log(nlRegB);
+console.log(nlRegC);
+console.log(nlResVal);

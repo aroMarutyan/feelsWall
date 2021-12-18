@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "../styles/messageStyles.css";
 // import { styled, css } from "@stitches/react";
 import { useTransition, animated } from "@react-spring/web";
+import { nlResVal } from "../styles/mediaStyles";
 
 // Tasks left to do:
 // 1. Solve async displaying of the messages - try playing around with the config value - DONE
@@ -31,25 +32,29 @@ const AsyncAnimMsg = ({
   tension,
 }) => {
   // const [counter1, setCounter1] = useState(1);
+  const wWidth = window.innerWidth;
+  const wHeight = window.innerHeight;
   const [isVisible, setIsVisible] = useState(true);
   const [message, setMessage] = useState("");
-  const [positionValue, setPositionValue] = useState(
-    45 + Math.floor(Math.random() * 10) + "%"
+  const [yPositionValue, setYPositionValue] = useState(
+    positionCalculator(yMathSign, nlResVal)
   );
-  const wHeight = window.innerHeight;
-  const wWidth = window.innerWidth;
-  let dimArr = [wHeight, wWidth];
+  const [xPositionValue, setXPositionValue] = useState(
+    positionCalculator(xMathSign, nlResVal)
+  );
+
+  // let dimArr = [wHeight, wWidth];
   // const { opacity } = useSpring({ opacity: isVisible ? 1 : 0 });
   const transition = useTransition(isVisible, {
     //Try to adapt the font formula here
     from: {
-      x: "20%",
-      y: "45%",
+      x: xPositionValue,
+      y: yPositionValue,
       opacity: 0,
     },
     enter: {
-      x: "20%",
-      y: "45%",
+      x: xPositionValue,
+      y: yPositionValue,
       opacity: 1,
     },
     leave: { opacity: 0 },
@@ -82,8 +87,14 @@ const AsyncAnimMsg = ({
   });
 
   function positionCalculator(sign, positionValue) {
-    if (wWidth < 640) return 0;
-    if (wWidth > 1440) return 50;
+    const posFor = (sign, value) =>
+      sign + (value + Math.floor(Math.random() * 10)) + "%";
+
+    if (wWidth <= 320) return posFor(sign, 1);
+
+    if (wWidth >= 1440) return posFor(sign, 45);
+
+    return posFor(sign, positionValue);
   }
   // function positionCalculator(sign, positionValue) {
   //   // return Number(sign + (correctionValue + positionValue));
@@ -101,9 +112,9 @@ const AsyncAnimMsg = ({
   // }
 
   //This is a good start. Best option is to find a way to bind it within borders, but if not, adjust values so that it stays within borders. More research
-  function getRandomPosition(min, max) {
-    return Math.random() * (max - min) + min;
-  }
+  // function getRandomPosition(min, max) {
+  //   return Math.random() * (max - min) + min;
+  // }
   // function getRandomPosition(...arr) {
   //   return `${(Math.random() * (arr[0] - arr[1]) + arr[1]) * 30}`;
   // }
@@ -111,9 +122,8 @@ const AsyncAnimMsg = ({
   useEffect(() => {
     if (isVisible) {
       setMessage(messages[Math.floor(Math.random() * messages.length)]);
-      // setPositionValue(getRandomPosition(dimArr.sort()));
-      // console.log(positionValue);
-      setPositionValue(45 + Math.floor(Math.random() * 10) + "%");
+      setYPositionValue(positionCalculator(yMathSign, nlResVal));
+      setXPositionValue(positionCalculator(xMathSign, nlResVal));
     }
   }, [isVisible]);
 
@@ -139,7 +149,7 @@ const AsyncAnimMsg = ({
               message={message}
               // message={messages[Math.floor(Math.random() * messages.length)]}
             />
-            {console.log(positionValue)}
+            {/* {console.log(positionValue)} */}
           </animated.div>
         ) : (
           ""
