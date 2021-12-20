@@ -17,7 +17,7 @@ export const { styled, css } = createStitches({
   },
 });
 
-//Dynamic font formula
+//Dynamic font formula - potentially adjust for bp0
 export const slope = (maxFontSize - minFontSize) / (bp3 / 16 - bp1 / 16);
 export const yAxisIntersection = (-bp1 / 16) * slope + minFontSize;
 
@@ -35,8 +35,11 @@ const nlRegC = 2 * Math.log((fullVal - medVal) / (medVal - zeroVal));
 //Final value for the nl regression. To be used in percentages
 export const nlResVal = nlRegA + nlRegB * Math.exp(nlRegC * initScrVal);
 
-console.log(initScrVal);
-console.log(nlRegA);
-console.log(nlRegB);
-console.log(nlRegC);
-console.log(nlResVal);
+// console.log(initScrVal);
+// console.log(nlRegA);
+// console.log(nlRegB);
+// console.log(nlRegC);
+// console.log(nlResVal);
+const a = 10;
+const b = 9;
+console.log(a * (a < b) + b * (b <= a));

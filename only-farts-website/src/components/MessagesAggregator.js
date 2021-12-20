@@ -28,7 +28,7 @@ import "../styles/messageStyles.css";
 // });
 
 const MessagesAggregator = ({ messages }) => {
-  const mobileTest = window.innerWidth > 768;
+  const mobileTest = window.innerWidth > 640;
 
   // const mobileTest = !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(
   //   navigator.userAgent
@@ -45,19 +45,21 @@ const MessagesAggregator = ({ messages }) => {
       {messages.length && mobileTest && (
         <AsyncAnimMsg
           messages={messages}
-          tension="40"
-          xCorrectionValue={"50%"}
-          yCorrectionValue={"-50%"}
+          tension="400"
+          xCorrectionValue={0}
+          yCorrectionValue={0}
+          multiValue={30}
           xMathSign={"-"}
           yMathSign={"-"}
         />
       )}
-      {messages.length && (
+      {/* {messages.length && (
         <AsyncAnimMsg
           messages={messages}
-          tension="50"
-          xCorrectionValue={"-50%"}
+          tension="500"
+          xCorrectionValue={0}
           yCorrectionValue={0}
+          multiValue={15}
           xMathSign={""}
           yMathSign={"-"}
         />
@@ -66,8 +68,9 @@ const MessagesAggregator = ({ messages }) => {
         <AsyncAnimMsg
           messages={messages}
           tension="60"
-          xCorrectionValue={"50%"}
-          yCorrectionValue={"-50%"}
+          xCorrectionValue={0}
+          yCorrectionValue={0}
+          multiValue={15}
           xMathSign={"-"}
           yMathSign={""}
         />
@@ -76,12 +79,13 @@ const MessagesAggregator = ({ messages }) => {
         <AsyncAnimMsg
           messages={messages}
           tension="70"
-          xCorrectionValue={"-50%"}
-          yCorrectionValue={"-50%"}
+          xCorrectionValue={0}
+          yCorrectionValue={0}
+          multiValue={15}
           xMathSign={""}
           yMathSign={""}
         />
-      )}
+      )} */}
 
       {/* {messages.length && (
         <AsyncMessageDelivery messages={messages} delay="6000" />
