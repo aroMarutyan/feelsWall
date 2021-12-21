@@ -24,8 +24,8 @@ export const yAxisIntersection = (-bp1 / 16) * slope + minFontSize;
 //Dynamic animation positioning. Takes into account screen size and distributes the messages using a nonlinear regression
 const initScrVal = (window.innerWidth - 320) / 1120;
 const zeroVal = 0; //x
-const medVal = 15; //y
-const fullVal = 45; //z
+const medVal = 7; //y
+const fullVal = 15; //z
 
 const nlRegA =
   (zeroVal * fullVal - Math.pow(medVal, 2)) / (zeroVal - 2 * medVal + fullVal);

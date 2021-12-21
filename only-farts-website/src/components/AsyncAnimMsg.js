@@ -45,13 +45,13 @@ const AsyncAnimMsg = ({
 
   const transition = useTransition(isVisible, {
     from: {
-      x: "100%",
-      y: "100%",
+      x: Math.random() * 100,
+      y: Math.random() * 100,
       opacity: 0,
     },
     enter: {
-      x: "100%",
-      y: "100%",
+      x: Math.random() * 100,
+      y: Math.random() * 100,
       opacity: 1,
     },
     leave: { opacity: 0 },
@@ -82,7 +82,7 @@ const AsyncAnimMsg = ({
 
     if (wWidth <= 320) return posFor(sign, 1);
 
-    if (wWidth >= 1440) return posFor(sign, 45);
+    if (wWidth >= 1440) return posFor(sign, 10);
 
     return posFor(sign, positionValue);
   }
@@ -100,9 +100,9 @@ const AsyncAnimMsg = ({
     <div
       className="containerr"
       style={{
-        position: "absolute",
-        width: "300px",
-        height: "300px",
+        // position: "absolute",
+        width: "100%",
+        height: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

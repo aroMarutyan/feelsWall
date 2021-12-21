@@ -48,18 +48,19 @@ const MessagesAggregator = ({ messages }) => {
           tension="400"
           xCorrectionValue={0}
           yCorrectionValue={0}
-          multiValue={30}
+          // yCorrectionValue={-Math.floor(Math.random() * 200)}
+          multiValue={5}
           xMathSign={"-"}
           yMathSign={"-"}
         />
       )}
-      {/* {messages.length && (
+      {messages.length && (
         <AsyncAnimMsg
           messages={messages}
-          tension="500"
+          tension="50"
           xCorrectionValue={0}
           yCorrectionValue={0}
-          multiValue={15}
+          multiValue={5}
           xMathSign={""}
           yMathSign={"-"}
         />
@@ -70,7 +71,7 @@ const MessagesAggregator = ({ messages }) => {
           tension="60"
           xCorrectionValue={0}
           yCorrectionValue={0}
-          multiValue={15}
+          multiValue={5}
           xMathSign={"-"}
           yMathSign={""}
         />
@@ -81,11 +82,11 @@ const MessagesAggregator = ({ messages }) => {
           tension="70"
           xCorrectionValue={0}
           yCorrectionValue={0}
-          multiValue={15}
+          multiValue={5}
           xMathSign={""}
           yMathSign={""}
         />
-      )} */}
+      )}
 
       {/* {messages.length && (
         <AsyncMessageDelivery messages={messages} delay="6000" />
