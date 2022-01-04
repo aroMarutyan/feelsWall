@@ -45,13 +45,13 @@ const AsyncAnimMsg = ({
 
   const transition = useTransition(isVisible, {
     from: {
-      x: Math.random() * 100,
-      y: Math.random() * 100,
+      x: ` ${Math.random() * 30}%`,
+      y: ` ${Math.random() * 30}%`,
       opacity: 0,
     },
     enter: {
-      x: Math.random() * 100,
-      y: Math.random() * 100,
+      x: ` ${Math.random() * 30}%`,
+      y: ` ${Math.random() * 30}%`,
       opacity: 1,
     },
     leave: { opacity: 0 },
