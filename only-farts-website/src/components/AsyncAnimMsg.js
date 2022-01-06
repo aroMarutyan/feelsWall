@@ -37,52 +37,70 @@ const AsyncAnimMsg = ({
   const [isVisible, setIsVisible] = useState(true);
   const [message, setMessage] = useState("");
   const [xPositionValue, setXPositionValue] = useState(
-    positionCalculator(xMathSign, nlResVal)
+    xPositionCalculator(nlResVal)
   );
   const [yPositionValue, setYPositionValue] = useState(
-    positionCalculator(yMathSign, nlResVal)
+    yPositionCalculator(Math.random() >= 0.5 ? "+" : "-", nlResVal)
   );
 
   const transition = useTransition(isVisible, {
-    from: {
-      x: ` ${Math.random() * 30}%`,
-      y: ` ${Math.random() * 30}%`,
-      opacity: 0,
-    },
-    enter: {
-      x: ` ${Math.random() * 30}%`,
-      y: ` ${Math.random() * 30}%`,
-      opacity: 1,
-    },
-    leave: { opacity: 0 },
+    //randomize x between 0 and 30
+    //randomize y between -50 and 50
+    //randomize sign for ALL elements
+    //Use correction value to adjust the values
+    //Modify nl reg formula to accept and use new values
+    //Right side messages closer to the center
     // from: {
-    //   x: xPositionValue,
-    //   y: yPositionValue,
+    //   x: "30%",
+    //   y: "50%",
     //   opacity: 0,
     // },
     // enter: {
-    //   x: xPositionValue,
-    //   y: yPositionValue,
+    //   x: "30%",
+    //   y: "50%",
     //   opacity: 1,
     // },
     // leave: { opacity: 0 },
+    // from: {
+    //   x: ` ${Math.random() * 30}%`,
+    //   y: ` ${Math.random() * 30}%`,
+    //   opacity: 0,
+    // },
+    // enter: {
+    //   x: ` ${Math.random() * 30}%`,
+    //   y: ` ${Math.random() * 30}%`,
+    //   opacity: 1,
+    // },
+    // leave: { opacity: 0 },
+    from: {
+      x: xPositionValue,
+      y: yPositionValue,
+      opacity: 0,
+    },
+    enter: {
+      x: xPositionValue,
+      y: yPositionValue,
+      opacity: 1,
+    },
+    leave: { opacity: 0 },
 
     config: { mass: 1, tension: tension, friction: 30 },
     onRest: () => setIsVisible(!isVisible),
   });
 
-  function positionCalculator(sign, positionValue) {
+  function xPositionCalculator(positionValue) {
+    const posFor = (value) =>
+      value + Math.floor(Math.random() * xCorrectionValue) + "%";
+
+    if (wWidth <= 320) return posFor(1);
+
+    if (wWidth >= 1440) return posFor(15);
+
+    return posFor(positionValue);
+  }
+  function yPositionCalculator(sign, positionValue) {
     const posFor = (sign, value) =>
-      sign +
-      (value +
-        Math.floor(Math.random() * multiValue) +
-        xCorrectionValue +
-        yCorrectionValue) +
-      "%";
-
-    if (wWidth <= 320) return posFor(sign, 1);
-
-    if (wWidth >= 1440) return posFor(sign, 10);
+      sign + (value + Math.floor(Math.random() * yCorrectionValue)) + "%";
 
     return posFor(sign, positionValue);
   }
@@ -90,8 +108,10 @@ const AsyncAnimMsg = ({
   useEffect(() => {
     if (isVisible) {
       setMessage(messages[Math.floor(Math.random() * messages.length)]);
-      setXPositionValue(positionCalculator(xMathSign, nlResVal));
-      setYPositionValue(positionCalculator(yMathSign, nlResVal));
+      setXPositionValue(xPositionCalculator(nlResVal));
+      setYPositionValue(
+        yPositionCalculator(Math.random() >= 0.5 ? "+" : "-", nlResVal)
+      );
     }
   }, [isVisible]);
 
@@ -132,8 +152,8 @@ const AsyncAnimMsg = ({
         )
       )}
       {/* Need to do more tests with the button. Seems like there's unintentional rerendering even when going from fade in to fade out */}
-      {console.log(xPositionValue)}
-      {/* {console.log(yPositionValue)} */}
+      {/* {console.log(xPositionValue)} */}
+      {console.log(yPositionValue)}
     </div>
     // <button onClick={() => setIsVisible((prev) => !prev)}></button>
     // </div>

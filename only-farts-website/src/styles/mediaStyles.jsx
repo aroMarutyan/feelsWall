@@ -26,8 +26,8 @@ export const yAxisIntersection =
 //Dynamic animation positioning. Takes into account screen size and distributes the messages using a nonlinear regression
 const initScrVal = (window.innerWidth - 320) / 1120;
 const zeroVal = 0; //x
-const medVal = 7; //y
-const fullVal = 15; //z
+const medVal = 5; //y
+const fullVal = 14; //z
 
 const nlRegA =
   (zeroVal * fullVal - Math.pow(medVal, 2)) / (zeroVal - 2 * medVal + fullVal);
@@ -47,3 +47,4 @@ export const nlResVal = nlRegA + nlRegB * Math.exp(nlRegC * initScrVal);
 // const a = 10;
 // const b = 9;
 // console.log(a * (a < b) + b * (b <= a));
+console.log(window.innerHeight);

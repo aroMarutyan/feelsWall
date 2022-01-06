@@ -28,46 +28,45 @@ const MessagesAggregator = ({ messages }) => {
       {messages.length && mobileTest && (
         <AsyncAnimMsg
           messages={messages}
-          tension="400"
-          xCorrectionValue={0}
-          yCorrectionValue={0}
-          // yCorrectionValue={-Math.floor(Math.random() * 200)}
-          multiValue={30}
-          xMathSign={"-"}
-          yMathSign={"-"}
+          tension="40"
+          xCorrectionValue={25}
+          yCorrectionValue={40}
+          // multiValue={10}
+          // xMathSign={"+"}
+          // yMathSign={Math.random() >= 0.5 ? "+" : "-"}
         />
       )}
       {messages.length && (
         <AsyncAnimMsg
           messages={messages}
           tension="50"
-          xCorrectionValue={0}
-          yCorrectionValue={0}
-          multiValue={30}
-          xMathSign={""}
-          yMathSign={"-"}
+          xCorrectionValue={25}
+          yCorrectionValue={40}
+          // multiValue={10}
+          // xMathSign={"+"}
+          // yMathSign={Math.random() >= 0.5 ? "+" : "-"}
         />
       )}
       {messages.length && (
         <AsyncAnimMsg
           messages={messages}
           tension="60"
-          xCorrectionValue={0}
-          yCorrectionValue={0}
-          multiValue={30}
-          xMathSign={"-"}
-          yMathSign={""}
+          xCorrectionValue={25}
+          yCorrectionValue={40}
+          // multiValue={10}
+          // xMathSign={"+"}
+          // yMathSign={Math.random() >= 0.5 ? "+" : "-"}
         />
       )}
       {messages.length && (
         <AsyncAnimMsg
           messages={messages}
           tension="70"
-          xCorrectionValue={0}
-          yCorrectionValue={0}
-          multiValue={30}
-          xMathSign={""}
-          yMathSign={""}
+          xCorrectionValue={25}
+          yCorrectionValue={40}
+          // multiValue={10}
+          // xMathSign={"+"}
+          // yMathSign={Math.random() >= 0.5 ? "+" : "-"}
         />
       )}
     </div>
