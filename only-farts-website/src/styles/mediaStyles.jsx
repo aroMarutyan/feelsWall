@@ -5,6 +5,8 @@ import { createStitches } from "@stitches/react";
 
 //breakpoints
 export const bp = [320, 640, 768, 1440];
+//If mobile
+export const mobileTest = window.innerWidth > bp[1];
 
 export const { styled, css } = createStitches({
   media: {
@@ -39,11 +41,10 @@ const nlRegC = 2 * Math.log((fullVal - medVal) / (medVal - zeroVal));
 //Final value for the nl regression. To be used in percentages
 export const nlResVal = nlRegA + nlRegB * Math.exp(nlRegC * initScrVal);
 
-// console.log(initScrVal);
-// console.log(nlRegA);
-// console.log(nlRegB);
-// console.log(nlRegC);
-// console.log(nlResVal);
+//Inverse number relation formula
+export const scale = (num, in_min, in_max, out_min, out_max) => {
+  return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+};
 
 ///testing random stuff
 // const a = 10;

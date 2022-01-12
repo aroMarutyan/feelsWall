@@ -1,11 +1,18 @@
 import AsyncAnimMsg from "./AsyncAnimMsg";
 import "../styles/messageStyles.css";
-import { css, bp } from "../styles/mediaStyles";
+import { css, bp, mobileTest, scale } from "../styles/mediaStyles";
 import { useState, useEffect } from "react";
 
 const MessagesAggregator = ({ messages }) => {
-  const mobileTest = window.innerWidth > bp[1];
+  // const mobileTest = window.innerWidth > bp[1];
   const [loadingCounter, setLoadingCounter] = useState(0);
+
+  const loadingNum = css({
+    color: "black",
+    position: "absolute",
+    opacity: "1",
+  });
+
   const gridBox = css({
     height: "95vh",
     width: "95vw",
@@ -30,9 +37,23 @@ const MessagesAggregator = ({ messages }) => {
     },
   });
 
-  // useEffect(() => {
-  //   return () => {};
-  // }, []);
+  let int;
+
+  useEffect(() => {
+    int = setInterval(blurring, 30);
+    // return () => loadingCounter > 99 && clearInterval(int);
+  }, []);
+
+  // let int = setInterval(blurring, 3000);
+
+  function blurring() {
+    setLoadingCounter((val) => val + 1);
+    loadingCounter >= 99 && clearInterval(int);
+
+    // loadingNum.innerText = `${loadingCounter}%`;
+    // loadingNum. = scale(loadingCounter, 0, 100, 1, 0);
+    // bg.style.filter = `blur(${scale(loadingCounter, 0, 100, 30, 0)}px)`;
+  }
 
   return (
     <div className={gridBox({ variant: mobileTest ? "desktop" : "mobile" })}>
@@ -47,9 +68,13 @@ const MessagesAggregator = ({ messages }) => {
           // yMathSign={Math.random() >= 0.5 ? "+" : "-"}
         />
       )}
-      {/* <h3 style={{ color: "black", position: "absolute" }}>
+      <h3
+        className={loadingNum({
+          opacity: "scale(loadingCounter, 0, 100, 1, 0)",
+        })}
+      >
         {loadingCounter}%
-      </h3> */}
+      </h3>
       {messages.length && (
         <AsyncAnimMsg
           messages={messages}

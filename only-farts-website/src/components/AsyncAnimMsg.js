@@ -50,6 +50,8 @@ const AsyncAnimMsg = ({
     //Use correction value to adjust the values
     //Modify nl reg formula to accept and use new values
     //Right side messages closer to the center
+
+    //OPTIONAL - add blur to messages, if not too costly
     // from: {
     //   x: "30%",
     //   y: "50%",

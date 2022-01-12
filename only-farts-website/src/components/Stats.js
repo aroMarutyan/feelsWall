@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { colorCoding } from "../core/colorCoding";
 // import { DataContext } from "../core/databaseSnapshot";
 
-import { css, bp, dynamicFontSize } from "../styles/mediaStyles";
+import { css, bp, dynamicFontSize, mobileTest } from "../styles/mediaStyles";
 
 const Stats = ({ outerRadius, innerRadius, messages }) => {
   // set the dimensions and margins of the graph
@@ -12,7 +12,7 @@ const Stats = ({ outerRadius, innerRadius, messages }) => {
   const minFontSize = 2;
   const maxFontSize = 5;
   const fontSize = dynamicFontSize(minFontSize, maxFontSize);
-  const mobileTest = window.innerWidth > bp[1];
+  // const mobileTest = window.innerWidth > bp[1];
   const gridStats = css({
     height: "95vh",
     width: "95vw",

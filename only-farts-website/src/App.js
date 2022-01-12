@@ -2,8 +2,10 @@ import "./App.css";
 import db from "./core/firebase";
 import { onSnapshot, collection } from "@firebase/firestore";
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 // import { DataContext, DataContextProvider } from "./core/databaseSnapshot";
+import { css } from "./styles/mediaStyles";
+// import { globalCss } from "@stitches/react";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
@@ -11,7 +13,6 @@ import Stats from "./components/Stats";
 
 import MessagesAggregator from "./components/MessagesAggregator";
 // import AsyncMessageDelivery from "./components/AsyncMessageDelivery";
-
 import "./App.css";
 
 //Task list
@@ -39,6 +40,53 @@ function App() {
   // const { messages } = useContext(DataContext);
   const [messages, setMessages] = useState([]);
 
+  // const globalFontStyles = globalCss({
+  //   "@font-face": {
+  //     fontFamily: "blankRiver",
+  //     src: 'url("fonts/Blank River.ttf")',
+  //   },
+  // });
+
+  const app = css({
+    textAlign: "center",
+    // filter: "blur(10px)",
+  });
+
+  const main = css({
+    backgroundImage: 'url("img/background_wals_white_generated.jpg")',
+    backgroundSize: "auto",
+    minHeight: "100vh",
+    fontFamily: "blankRiver",
+    /* height: 100vh;
+  width: 100vw; */
+    /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly; */
+    fontSize: "16px",
+    /* font-size: calc(10px + 2vmin); */
+    color: "white",
+  });
+
+  const navBar = css({
+    display: "flex",
+    alignItems: "center",
+    color: "black",
+  });
+
+  const navMainLink = css({
+    marginLeft: "2rem",
+    // marginTop: "1rem",
+    marginRight: "1rem",
+    textDecoration: "none",
+  });
+
+  const navStatsLink = css({
+    marginTop: "0.4rem",
+    marginRight: "1rem",
+    textDecoration: "none",
+  });
+
   useEffect(
     () =>
       onSnapshot(collection(db, "messages"), (snapshot) =>
@@ -48,25 +96,23 @@ function App() {
   );
 
   return (
-    <div className="App">
+    <div className={app()}>
       <nav>
-        <div
-          style={{
-            display: "flex",
-            position: "absolute",
-            top: "1%",
-            left: "2%",
-          }}
-        >
-          <h1 style={{ marginTop: "0", marginRight: "1em" }}>
-            <a href="/">OnlyFarts</a>
+        {/* <div className="main"> */}
+        <div className={navBar()}>
+          <h1 className={navMainLink()}>
+            <a style={{ textDecoration: "none", color: "black" }} href="/">
+              OnlyFarts
+            </a>
           </h1>
-          <span style={{ marginTop: "0.5em", marginRight: "1em" }}>
-            <a href="/stats">Statistics</a>
+          <span className={navStatsLink()}>
+            <a style={{ textDecoration: "none", color: "black" }} href="/stats">
+              Statistics
+            </a>
           </span>
         </div>
       </nav>
-      <main className="main">
+      <main className={main()}>
         {/* <Stats
           data={messages}
           outerRadius="200"
