@@ -142,6 +142,7 @@ const AsyncAnimMsg = ({
           >
             <DisplayMessages
               message={message}
+              isVisible={isVisible}
 
               // message={messages[Math.floor(Math.random() * messages.length)]}
             />
@@ -153,7 +154,7 @@ const AsyncAnimMsg = ({
       )}
       {/* Need to do more tests with the button. Seems like there's unintentional rerendering even when going from fade in to fade out */}
       {/* {console.log(xPositionValue)} */}
-      {console.log(yPositionValue)}
+      {/* {console.log(yPositionValue)} */}
     </div>
     // <button onClick={() => setIsVisible((prev) => !prev)}></button>
     // </div>

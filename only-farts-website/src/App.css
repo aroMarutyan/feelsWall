@@ -2,9 +2,17 @@
   text-align: center;
 }
 
+@font-face {
+  font-family: urbanHeroes;
+  src: url("fonts/Blank\ River.ttf");
+}
+
 .main {
-  background-color: #282c34;
+  /* background-color: #282c34; */
+  background-image: url("img/background_wals_white_generated.jpg");
+  background-size: auto;
   min-height: 100vh;
+  font-family: urbanHeroes;
   /* height: 100vh;
   width: 100vw; */
   /* display: flex;
@@ -14,5 +22,6 @@
   font-size: 16px;
   /* font-size: calc(10px + 2vmin); */
   color: white;
+  /* filter: blur(1px); */
   /* flex: 1; */
 }

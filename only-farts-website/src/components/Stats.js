@@ -3,10 +3,41 @@ import { useEffect } from "react";
 import { colorCoding } from "../core/colorCoding";
 // import { DataContext } from "../core/databaseSnapshot";
 
+import { css, bp, dynamicFontSize } from "../styles/mediaStyles";
+
 const Stats = ({ outerRadius, innerRadius, messages }) => {
   // set the dimensions and margins of the graph
   // const { data, outerRadius, innerRadius, messages } = props;
   // const { messages } = useContext(DataContext);
+  const minFontSize = 2;
+  const maxFontSize = 5;
+  const fontSize = dynamicFontSize(minFontSize, maxFontSize);
+  const mobileTest = window.innerWidth > bp[1];
+  const gridStats = css({
+    height: "95vh",
+    width: "95vw",
+    display: "grid",
+
+    variants: {
+      variant: {
+        mobile: {
+          gridTemplateColumns: "1fr",
+          gridTemplateRows: "1fr 1fr",
+        },
+        desktop: {
+          gridTemplateColumns: "1fr 1fr",
+          gridTemplateRows: "1fr",
+        },
+      },
+    },
+  });
+
+  const messagesStyle = css({
+    fontSize: `clamp(${minFontSize}rem, ${fontSize[1]}rem + ${
+      fontSize[0] * 100
+    }vw, ${maxFontSize}rem)`,
+    color: "black",
+  });
 
   const margin = {
     top: 50,
@@ -104,9 +135,9 @@ const Stats = ({ outerRadius, innerRadius, messages }) => {
     // });
   }
   return (
-    <div>
+    <div className={gridStats({ variant: mobileTest ? "desktop" : "mobile" })}>
       <div id="pie-container" />
-      <h1>Messages submitted: {messages.length}</h1>
+      <h1 className={messagesStyle()}>Messages submitted: {messages.length}</h1>
     </div>
   );
 };

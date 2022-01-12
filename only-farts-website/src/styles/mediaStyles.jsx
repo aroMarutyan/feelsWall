@@ -1,7 +1,7 @@
 import { createStitches } from "@stitches/react";
 
-export const maxFontSize = 1.9;
-export const minFontSize = 1;
+// export const maxFontSize = 2.7;
+// export const minFontSize = 1.3;
 
 //breakpoints
 export const bp = [320, 640, 768, 1440];
@@ -17,11 +17,13 @@ export const { styled, css } = createStitches({
 
 //Dynamic font formula - potentially adjust for bp0
 const defaultFontSize = 16;
-export const slope =
-  (maxFontSize - minFontSize) /
-  (bp[3] / defaultFontSize - bp[1] / defaultFontSize);
-export const yAxisIntersection =
-  (-bp[1] / defaultFontSize) * slope + minFontSize;
+export const dynamicFontSize = (minFontSize, maxFontSize) => {
+  const slope =
+    (maxFontSize - minFontSize) /
+    (bp[3] / defaultFontSize - bp[1] / defaultFontSize);
+  const yAxisIntersection = (-bp[1] / defaultFontSize) * slope + minFontSize;
+  return [slope, yAxisIntersection];
+};
 
 //Dynamic animation positioning. Takes into account screen size and distributes the messages using a nonlinear regression
 const initScrVal = (window.innerWidth - 320) / 1120;
@@ -47,4 +49,4 @@ export const nlResVal = nlRegA + nlRegB * Math.exp(nlRegC * initScrVal);
 // const a = 10;
 // const b = 9;
 // console.log(a * (a < b) + b * (b <= a));
-console.log(window.innerHeight);
+// console.log(window.innerHeight);
