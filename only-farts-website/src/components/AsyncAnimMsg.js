@@ -78,6 +78,7 @@ const AsyncAnimMsg = ({
       x: xPositionValue,
       y: yPositionValue,
       opacity: 0,
+      // filter: "blur(1px)",
     },
     enter: {
       x: xPositionValue,

@@ -2,16 +2,18 @@ import AsyncAnimMsg from "./AsyncAnimMsg";
 import "../styles/messageStyles.css";
 import { css, bp, mobileTest, scale } from "../styles/mediaStyles";
 import { useState, useEffect } from "react";
+import loadingCounter from "./LoadingCounter";
+import LoadingCounter from "./LoadingCounter";
 
 const MessagesAggregator = ({ messages }) => {
   // const mobileTest = window.innerWidth > bp[1];
-  const [loadingCounter, setLoadingCounter] = useState(0);
+  // const [loadingCounter, setLoadingCounter] = useState(0);
 
-  const loadingNum = css({
-    color: "black",
-    position: "absolute",
-    opacity: "1",
-  });
+  // const loadingNum = css({
+  //   color: "black",
+  //   position: "absolute",
+  //   opacity: "1",
+  // });
 
   const gridBox = css({
     height: "95vh",
@@ -37,24 +39,25 @@ const MessagesAggregator = ({ messages }) => {
     },
   });
 
-  let int;
-
-  useEffect(() => {
-    int = setInterval(blurring, 30);
-    // return () => loadingCounter > 99 && clearInterval(int);
-  }, []);
+  // let int;
+  // //Might need to use useRef. In general adapting the blurring to react is a hassle. Once again I reach a point where I realize there is much more to learn
+  // //I've been humbled by React once more
+  // useEffect(() => {
+  //   int = setInterval(blurring, 30);
+  //   return () => clearInterval(int);
+  // }, []);
 
   // let int = setInterval(blurring, 3000);
 
-  function blurring() {
-    setLoadingCounter((val) => val + 1);
-    loadingCounter >= 99 && clearInterval(int);
+  // function blurring() {
+  //   setLoadingCounter((val) => val + 1);
+  //   loadingCounter >= 99 && clearInterval(int);
 
-    // loadingNum.innerText = `${loadingCounter}%`;
-    // loadingNum. = scale(loadingCounter, 0, 100, 1, 0);
-    // bg.style.filter = `blur(${scale(loadingCounter, 0, 100, 30, 0)}px)`;
-  }
-
+  //   // loadingNum.innerText = `${loadingCounter}%`;
+  //   // loadingNum. = scale(loadingCounter, 0, 100, 1, 0);
+  //   // bg.style.filter = `blur(${scale(loadingCounter, 0, 100, 30, 0)}px)`;
+  // }
+  // console.log(loadingCounter);
   return (
     <div className={gridBox({ variant: mobileTest ? "desktop" : "mobile" })}>
       {messages.length && mobileTest && (
@@ -68,13 +71,7 @@ const MessagesAggregator = ({ messages }) => {
           // yMathSign={Math.random() >= 0.5 ? "+" : "-"}
         />
       )}
-      <h3
-        className={loadingNum({
-          opacity: "scale(loadingCounter, 0, 100, 1, 0)",
-        })}
-      >
-        {loadingCounter}%
-      </h3>
+
       {messages.length && (
         <AsyncAnimMsg
           messages={messages}

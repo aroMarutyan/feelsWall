@@ -4,7 +4,7 @@ import { onSnapshot, collection } from "@firebase/firestore";
 
 import { useState, useEffect } from "react";
 // import { DataContext, DataContextProvider } from "./core/databaseSnapshot";
-import { css } from "./styles/mediaStyles";
+import { css, scale } from "./styles/mediaStyles";
 // import { globalCss } from "@stitches/react";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
@@ -39,6 +39,7 @@ import "./App.css";
 function App() {
   // const { messages } = useContext(DataContext);
   const [messages, setMessages] = useState([]);
+  // const [loadingCounter, setLoadingCounter] = useState(0);
 
   // const globalFontStyles = globalCss({
   //   "@font-face": {
@@ -49,7 +50,10 @@ function App() {
 
   const app = css({
     textAlign: "center",
-    // filter: "blur(10px)",
+    // filter: `blur(${scale(loadingCounter, 0, 100, 30, 0)}px)`,
+    // backgroundImage: 'url("img/background_wals_white_generated.jpg")',
+    // backgroundSize: "auto",
+    // minHeight: "100vh",
   });
 
   const main = css({
@@ -57,14 +61,8 @@ function App() {
     backgroundSize: "auto",
     minHeight: "100vh",
     fontFamily: "blankRiver",
-    /* height: 100vh;
-  width: 100vw; */
-    /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly; */
+    // height: "95vh",
     fontSize: "16px",
-    /* font-size: calc(10px + 2vmin); */
     color: "white",
   });
 
@@ -72,6 +70,8 @@ function App() {
     display: "flex",
     alignItems: "center",
     color: "black",
+    backgroundColor: "transparent",
+    minHeight: "1vh",
   });
 
   const navMainLink = css({
@@ -133,14 +133,7 @@ function App() {
             <Route
               path="/stats"
               exact
-              element={
-                <Stats
-                  // data={messages}
-                  outerRadius="200"
-                  innerRadius="100"
-                  messages={messages}
-                />
-              }
+              element={<Stats messages={messages} />}
             />
           </Routes>
         </BrowserRouter>

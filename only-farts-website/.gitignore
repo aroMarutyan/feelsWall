@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+/src/components/LoadingCounter.js
+/src/components/msgfail.js
 
 # /src/firebase.js
 /src/core/config.js

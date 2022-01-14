@@ -3,16 +3,30 @@ import { useEffect } from "react";
 import { colorCoding } from "../core/colorCoding";
 // import { DataContext } from "../core/databaseSnapshot";
 
-import { css, bp, dynamicFontSize, mobileTest } from "../styles/mediaStyles";
+import {
+  css,
+  bp,
+  dynamicFontSize,
+  mobileTest,
+  outerRadius,
+  innerRadius,
+} from "../styles/mediaStyles";
 
-const Stats = ({ outerRadius, innerRadius, messages }) => {
+const Stats = ({ messages }) => {
   // set the dimensions and margins of the graph
   // const { data, outerRadius, innerRadius, messages } = props;
   // const { messages } = useContext(DataContext);
-  const minFontSize = 2;
-  const maxFontSize = 5;
-  const fontSize = dynamicFontSize(minFontSize, maxFontSize);
-  // const mobileTest = window.innerWidth > bp[1];
+  //Messages submitted dymanic font
+  const msgMinFontSize = 2;
+  const msgMaxFontSize = 5;
+  const msgFontSize = dynamicFontSize(msgMinFontSize, msgMaxFontSize);
+  console.log(msgFontSize);
+  //Pie chart dynamic font
+  const chartMinFontSize = 1.3;
+  const chartMaxFontSize = 2.6;
+  const chartFontSize = dynamicFontSize(chartMinFontSize, chartMaxFontSize);
+  // console.log(chartFontSize);
+
   const gridStats = css({
     height: "95vh",
     width: "95vw",
@@ -33,9 +47,9 @@ const Stats = ({ outerRadius, innerRadius, messages }) => {
   });
 
   const messagesStyle = css({
-    fontSize: `clamp(${minFontSize}rem, ${fontSize[1]}rem + ${
-      fontSize[0] * 100
-    }vw, ${maxFontSize}rem)`,
+    fontSize: `clamp(${msgMinFontSize}rem, ${msgFontSize[1]}rem + ${
+      msgFontSize[0] * 100
+    }vw, ${msgMaxFontSize}rem)`,
     color: "black",
   });
 
@@ -80,7 +94,7 @@ const Stats = ({ outerRadius, innerRadius, messages }) => {
       arr.filter((str) => str === value).length,
     ]);
 
-    console.log(dataReady);
+    // console.log(dataReady);
 
     // Remove the old svg
     d3.select("#pie-container").select("svg").remove();
@@ -125,7 +139,12 @@ const Stats = ({ outerRadius, innerRadius, messages }) => {
       .text((d) => d.data[0])
       .style("fill", "white")
       .style("text-anchor", "middle")
-      .style("font-size", 17)
+      .style(
+        "font-size",
+        `clamp(${chartMinFontSize}rem, ${chartFontSize[1]}rem + ${
+          chartFontSize[0] * 100
+        }vw, ${chartMaxFontSize}rem)`
+      )
       .attr("transform", function (d) {
         return `translate(${arcGenerator.centroid(d)})`;
       });
