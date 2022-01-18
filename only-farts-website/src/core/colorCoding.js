@@ -8,4 +8,4 @@ colorCoding
   .set("surprised", "orange")
   .set("afraid", "yellow")
   .set("angry", "red")
-  .set("other", "gray");
+  .set("indifferent", "gray");

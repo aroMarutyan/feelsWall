@@ -1,11 +1,9 @@
 import * as d3 from "d3";
 import { useEffect } from "react";
 import { colorCoding } from "../core/colorCoding";
-// import { DataContext } from "../core/databaseSnapshot";
 
 import {
   css,
-  bp,
   dynamicFontSize,
   mobileTest,
   outerRadius,
@@ -13,19 +11,21 @@ import {
 } from "../styles/mediaStyles";
 
 const Stats = ({ messages }) => {
-  // set the dimensions and margins of the graph
-  // const { data, outerRadius, innerRadius, messages } = props;
-  // const { messages } = useContext(DataContext);
   //Messages submitted dymanic font
   const msgMinFontSize = 2;
   const msgMaxFontSize = 5;
   const msgFontSize = dynamicFontSize(msgMinFontSize, msgMaxFontSize);
-  console.log(msgFontSize);
   //Pie chart dynamic font
   const chartMinFontSize = 1.3;
   const chartMaxFontSize = 2.6;
   const chartFontSize = dynamicFontSize(chartMinFontSize, chartMaxFontSize);
-  // console.log(chartFontSize);
+  //Message breakdown dynamic font
+  const breakdownMinFontSize = 1.3;
+  const breakdownMaxFontSize = 2.6;
+  const breakdownFontSize = dynamicFontSize(
+    breakdownMinFontSize,
+    breakdownMaxFontSize
+  );
 
   const gridStats = css({
     height: "95vh",
@@ -36,21 +36,35 @@ const Stats = ({ messages }) => {
       variant: {
         mobile: {
           gridTemplateColumns: "1fr",
-          gridTemplateRows: "1fr 1fr",
+          gridTemplateRows: "1fr 1fr 1fr",
         },
         desktop: {
           gridTemplateColumns: "1fr 1fr",
-          gridTemplateRows: "1fr",
+          gridTemplateRows: "1fr 1fr",
+        },
+      },
+    },
+  });
+
+  const pieChartStyle = css({
+    variants: {
+      variant: {
+        desktop: {
+          gridRow: "1 /span 2",
         },
       },
     },
   });
 
   const messagesStyle = css({
-    fontSize: `clamp(${msgMinFontSize}rem, ${msgFontSize[1]}rem + ${
-      msgFontSize[0] * 100
-    }vw, ${msgMaxFontSize}rem)`,
+    fontSize: `clamp(${msgMinFontSize}rem, ${msgFontSize}rem, ${msgMaxFontSize}rem)`,
     color: "black",
+  });
+
+  const msgBreakdownStyle = css({
+    fontSize: `clamp(${breakdownMinFontSize}rem, ${breakdownFontSize}rem, ${breakdownMaxFontSize}rem)`,
+    color: "black",
+    listStyle: "none",
   });
 
   const margin = {
@@ -63,14 +77,43 @@ const Stats = ({ messages }) => {
   const width = 2 * outerRadius + margin.left + margin.right;
   const height = 2 * outerRadius + margin.top + margin.bottom;
 
-  // const colorScale = d3
-  //   .scaleSequential()
-  //   .interpolator(d3.interpolateCool)
-  //   .domain([0, data.length]);
-
   useEffect(() => {
     drawChart();
   }, [messages]);
+
+  const childKiller = (parent) => {
+    while (parent.firstChild) {
+      parent.firstChild.remove();
+    }
+  };
+
+  const dataRetriever = (messages) => {
+    let arr = messages.map((entry) => {
+      return entry.emotion;
+    });
+    let unique = [...new Set(arr)];
+
+    let finalData = unique.map((value) => [
+      value,
+      arr.filter((str) => str === value).length,
+    ]);
+    return finalData.sort();
+  };
+  const dataReady = dataRetriever(messages);
+
+  const breakdownList = document.getElementById("breakdown-list");
+  const breakdownListGenerator = (arr, list) => {
+    breakdownList !== null && childKiller(breakdownList);
+
+    arr.forEach((entry) => {
+      let listItem = document.createElement("li");
+      listItem.innerHTML = `${entry[1]} ${
+        entry[1] > 1 ? "people are" : "person is"
+      } ${entry[0] === "love" ? "in" : ""} ${entry[0]}`;
+      list.appendChild(listItem);
+    });
+  };
+  dataReady && breakdownListGenerator(dataReady, breakdownList);
 
   function drawChart() {
     //reduce method - more elegant solution. Check if you can implement it without too much headache
@@ -84,17 +127,6 @@ const Stats = ({ messages }) => {
     // console.log(filteredMessages);
 
     //set and filter method - second option if can't get the upper one to output arrays
-    let arr = messages.map((entry) => {
-      return entry.emotion;
-    });
-    let unique = [...new Set(arr)];
-
-    let dataReady = unique.map((value) => [
-      value,
-      arr.filter((str) => str === value).length,
-    ]);
-
-    // console.log(dataReady);
 
     // Remove the old svg
     d3.select("#pie-container").select("svg").remove();
@@ -120,13 +152,10 @@ const Stats = ({ messages }) => {
 
     const arc = svg.selectAll().data(pieGenerator(dataReady)).enter();
 
-    // Append arcs
-    //DONT FORGET ABOUT .update() - can add gradual transitions
     arc
       .append("path")
       .attr("d", arcGenerator)
       .style("fill", (d) => colorCoding.get(d.data[0]))
-      // .style("fill", (_, i) => colorScale(i))
       .style("stroke", "#ffffff")
       .style("stroke-width", 0);
 
@@ -141,42 +170,23 @@ const Stats = ({ messages }) => {
       .style("text-anchor", "middle")
       .style(
         "font-size",
-        `clamp(${chartMinFontSize}rem, ${chartFontSize[1]}rem + ${
-          chartFontSize[0] * 100
-        }vw, ${chartMaxFontSize}rem)`
+        `clamp(${chartMinFontSize}rem, ${chartFontSize}rem, ${chartMaxFontSize}rem)`
       )
       .attr("transform", function (d) {
         return `translate(${arcGenerator.centroid(d)})`;
       });
-    // .attr("transform", (d) => {
-    //   const [x, y] = arcGenerator.centroid(d);
-    //   return `translate(${x}, ${y})`;
-    // });
   }
+
   return (
     <div className={gridStats({ variant: mobileTest ? "desktop" : "mobile" })}>
-      <div id="pie-container" />
+      <div
+        id="pie-container"
+        className={pieChartStyle({ variant: mobileTest && "desktop" })}
+      />
       <h1 className={messagesStyle()}>Messages submitted: {messages.length}</h1>
+      <ul className={msgBreakdownStyle()} id="breakdown-list"></ul>
     </div>
   );
 };
 
 export default Stats;
-
-// const Stats = () => {
-//   const [messages, setMessages] = useState([]);
-
-//   useEffect(
-//     () =>
-//       onSnapshot(collection(db, "messages"), (snapshot) =>
-//         setMessages(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-//       ),
-//     []
-//   );
-//   return (
-//     <div>
-//       <h1>Statistics</h1>
-//       <h3>Number of Messages:{messages.length}</h3>
-//     </div>
-//   );
-// };

@@ -12,7 +12,7 @@ import {
 } from "./dictionary";
 
 import { useState, useEffect } from "react";
-import { useSpring, animated, config } from "@react-spring/web";
+import { useSpring, animated } from "@react-spring/web";
 
 const App = () => {
   const [formValue, setFormValue] = useState("");
@@ -63,7 +63,9 @@ const App = () => {
         (a, b) => b[1] - a[1]
       );
       setEmotion(
-        sortedEmotionStrength.length ? sortedEmotionStrength[0][0] : "other"
+        sortedEmotionStrength.length
+          ? sortedEmotionStrength[0][0]
+          : "indifferent"
       );
     };
 

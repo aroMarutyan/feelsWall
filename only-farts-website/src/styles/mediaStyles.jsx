@@ -1,8 +1,5 @@
 import { createStitches } from "@stitches/react";
 
-// export const maxFontSize = 2.7;
-// export const minFontSize = 1.3;
-
 //breakpoints
 export const bp = [320, 640, 768, 1440];
 //If mobile
@@ -18,11 +15,19 @@ export const { styled, css } = createStitches({
 });
 
 //Dynamic font formula - potentially adjust for bp0. Might not be working as intended. Double-check
-const defaultFontSize = 16;
+// const defaultFontSize = 16;
+// export const dynamicFontSize = (minFontSize, maxFontSize) => {
+//   const slope = (maxFontSize - minFontSize) / (bp[3] / 16 - bp[0] / 16);
+//   const yAxisIntersection = (-bp[0] / 16) * slope + minFontSize;
+//   return [slope, yAxisIntersection];
+// };
+
 export const dynamicFontSize = (minFontSize, maxFontSize) => {
-  const slope = (maxFontSize - minFontSize) / (bp[3] / 16 - bp[1] / 16);
-  const yAxisIntersection = (-bp[1] / 16) * slope + minFontSize;
-  return [slope, yAxisIntersection];
+  return (
+    minFontSize +
+    (maxFontSize - minFontSize) *
+      ((window.innerWidth - bp[0]) / 16 / ((bp[3] - bp[0]) / 16))
+  );
 };
 
 //Dynamic animation positioning. Takes into account screen size and distributes the messages using a nonlinear regression
@@ -64,11 +69,6 @@ export const scale = (num, in_min, in_max, out_min, out_max) => {
   return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
 };
 
-//Pie chart size
-//min size = 135
-//med size = min+( (max -min)/2)
-//max size = 310
-//inner radius - half of outer
 const pieMinSize = 135;
 const pieMaxSize = 310;
 const pieMedSize = pieMinSize + (pieMaxSize - pieMinSize) / 2 + 1;
@@ -80,9 +80,6 @@ export const outerRadius = regressionFinalValue(
   initScrVal
 );
 export const innerRadius = 0;
-// console.log(finalPieVal);
-// export const outerRadius =
-// const innerRadius
 
 ///testing random stuff
 // const a = 10;
