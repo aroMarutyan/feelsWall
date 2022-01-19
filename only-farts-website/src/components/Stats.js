@@ -12,12 +12,12 @@ import {
 
 const Stats = ({ messages }) => {
   //Messages submitted dymanic font
-  const msgMinFontSize = 2;
-  const msgMaxFontSize = 5;
+  const msgMinFontSize = 1.8;
+  const msgMaxFontSize = 4.6;
   const msgFontSize = dynamicFontSize(msgMinFontSize, msgMaxFontSize);
   //Pie chart dynamic font
   const chartMinFontSize = 1.3;
-  const chartMaxFontSize = 2.6;
+  const chartMaxFontSize = 2.2;
   const chartFontSize = dynamicFontSize(chartMinFontSize, chartMaxFontSize);
   //Message breakdown dynamic font
   const breakdownMinFontSize = 1.3;
@@ -65,6 +65,8 @@ const Stats = ({ messages }) => {
     fontSize: `clamp(${breakdownMinFontSize}rem, ${breakdownFontSize}rem, ${breakdownMaxFontSize}rem)`,
     color: "black",
     listStyle: "none",
+    // alignSelf: "center",
+    placeSelf: "center",
   });
 
   const margin = {
@@ -183,7 +185,7 @@ const Stats = ({ messages }) => {
         id="pie-container"
         className={pieChartStyle({ variant: mobileTest && "desktop" })}
       />
-      <h1 className={messagesStyle()}>Messages submitted: {messages.length}</h1>
+      <h1 className={messagesStyle()}>Feelings Shared: {messages.length}</h1>
       <ul className={msgBreakdownStyle()} id="breakdown-list"></ul>
     </div>
   );

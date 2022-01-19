@@ -70,7 +70,7 @@ function App() {
         <div className={navBar()}>
           <h1 className={navMainLink()}>
             <a style={{ textDecoration: "none", color: "black" }} href="/">
-              OnlyFarts
+              FeelsWall
             </a>
           </h1>
           <span className={navStatsLink()}>
