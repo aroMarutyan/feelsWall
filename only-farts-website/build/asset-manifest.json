@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c3135259.chunk.css",
+    "main.js": "/static/js/main.3a011aa8.chunk.js",
+    "main.js.map": "/static/js/main.3a011aa8.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.c89b2e4d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.c89b2e4d.js.map",
+    "static/js/2.3cae519d.chunk.js": "/static/js/2.3cae519d.chunk.js",
+    "static/js/2.3cae519d.chunk.js.map": "/static/js/2.3cae519d.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.c3135259.chunk.css.map": "/static/css/main.c3135259.chunk.css.map",
+    "static/js/2.3cae519d.chunk.js.LICENSE.txt": "/static/js/2.3cae519d.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/Blank River.031ea84d.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c89b2e4d.js",
+    "static/js/2.3cae519d.chunk.js",
+    "static/css/main.c3135259.chunk.css",
+    "static/js/main.3a011aa8.chunk.js"
+  ]
+}
